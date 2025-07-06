@@ -13,8 +13,11 @@ gem "bootsnap", require: false
 gem "rack-rewrite"
 gem "tailwindcss-rails", "~> 4.2"
 gem 'devise'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
+  gem "dotenv-rails"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
