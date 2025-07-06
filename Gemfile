@@ -12,6 +12,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "rack-rewrite"
 gem "tailwindcss-rails", "~> 4.2"
+gem 'devise'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
