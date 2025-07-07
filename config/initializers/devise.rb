@@ -24,4 +24,9 @@ Devise.setup do |config|
       prompt: 'select_account',
       access_type: 'offline'
     }
+  
+  config.omniauth :github,
+    ENV['GITHUB_CLIENT_ID'],
+    ENV['GITHUB_CLIENT_SECRET'],
+    scope: 'user:email'
 end

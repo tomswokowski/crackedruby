@@ -15,6 +15,7 @@ gem "tailwindcss-rails", "~> 4.2"
 gem 'devise'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-github'
 
 group :development, :test do
   gem "dotenv-rails"

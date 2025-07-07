@@ -24,6 +24,7 @@
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo: false } %>
       <% else %>
         <%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>
+        <%= button_to "Sign in with GitHub", user_github_omniauth_authorize_path, method: :post, data: { turbo: false } %>
       <% end %>
       <%= yield %>
   </body>
