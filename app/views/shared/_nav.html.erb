@@ -1,4 +1,4 @@
-<div data-controller="drawer" class="flex flex-col w-full">
+<div data-controller="drawer sign-in-modal" class="flex flex-col w-full">
   <header data-controller="header" class="fixed top-0 left-0 right-0 bg-white text-gray-900 flex items-center justify-start p-4 z-40 shadow-md transform transition-transform duration-300 md:hidden">
     <button class="mr-4" data-action="click->drawer#toggle">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -25,16 +25,23 @@
       ✕
     </button>
 
-    <div class="flex-1 p-4">
+    <div class="flex-1 p-4 flex flex-col">
       <h2 class="text-xl font-bold mb-4">CrackedRuby</h2>
 
-      <% if user_signed_in? %>
-        <p class="mb-4">Signed in as <%= current_user.email %></p>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-full mb-4 bg-red-600 text-white py-2 px-4 rounded" %>
-      <% else %>
-        <%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full mb-2 bg-blue-600 text-white py-2 px-4 rounded" %>
-        <%= button_to "Sign in with GitHub", user_github_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full mb-2 bg-gray-700 text-white py-2 px-4 rounded" %>
-      <% end %>
+      <div class="mt-auto">
+        <% if user_signed_in? %>
+          <p class="mb-2 text-sm">Signed in as <%= current_user.email %></p>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-full mb-2 bg-red-600 text-white py-2 px-4 rounded" %>
+        <% else %>
+          <button
+            class="w-full bg-gray-900 text-white py-2 px-4 rounded"
+            data-action="click->sign-in-modal#open">
+            Sign In
+          </button>
+        <% end %>
+      </div>
     </div>
   </nav>
+
+  <%= render "shared/sign_in_modal" %>
 </div>
