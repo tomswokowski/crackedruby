@@ -18,13 +18,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex">
+  <body class="flex flex-col">
     <%= render "shared/nav" %>
 
-    <main class="flex-1 md:ml-64 p-4">
-      <div class="max-w-3xl mx-auto">
-        <%= yield %>
-      </div>
-    </main>
+    <div class="flex flex-1 pt-16 md:pt-0">
+      <main class="flex-1 md:ml-64 p-4">
+        <div class="max-w-4xl mx-auto">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
   </body>
 </html>

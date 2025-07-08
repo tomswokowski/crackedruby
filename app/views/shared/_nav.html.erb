@@ -1,8 +1,13 @@
-<div data-controller="drawer" class="flex">
-  <button class="md:hidden p-4 fixed top-4 left-4 z-50" data-action="click->drawer#toggle">
-    ☰
-  </button>
-
+<div data-controller="drawer" class="flex flex-col w-full">
+  <header data-controller="header" class="fixed top-0 left-0 right-0 bg-white text-gray-900 flex items-center justify-start p-4 z-40 shadow-md transform transition-transform duration-300 md:hidden">
+    <button class="mr-4" data-action="click->drawer#toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+      </svg>
+    </button>
+    <h1 class="text-lg font-bold">CrackedRuby</h1>
+  </header>
+  
   <div 
     data-drawer-target="backdrop"
     data-action="click->drawer#close"
@@ -10,11 +15,11 @@
 
   <nav
     id="nav"
-    class="fixed inset-y-0 left-0 w-64 bg-gray-800 text-white transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col"
+    class="fixed inset-y-0 left-0 w-64 bg-white text-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col shadow-md"
     data-drawer-target="panel">
 
     <button
-      class="absolute top-4 right-[-2.5rem] bg-gray-700 text-white rounded-full w-8 h-8 flex items-center justify-center md:hidden z-50 hidden"
+      class="absolute top-4 right-[-2.5rem] bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center md:hidden z-50 shadow-md"
       data-drawer-target="closeButton"
       data-action="click->drawer#close">
       ✕
