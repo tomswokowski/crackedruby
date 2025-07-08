@@ -18,14 +18,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-      <% if user_signed_in? %>
-        <p>Signed in as <%= current_user.email %></p>
-        <%= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo: false } %>
-      <% else %>
-        <%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>
-        <%= button_to "Sign in with GitHub", user_github_omniauth_authorize_path, method: :post, data: { turbo: false } %>
-      <% end %>
-      <%= yield %>
+  <body class="flex">
+    <%= render "shared/nav" %>
+
+    <main class="flex-1 md:ml-64 p-4">
+      <div class="max-w-3xl mx-auto">
+        <%= yield %>
+      </div>
+    </main>
   </body>
 </html>
