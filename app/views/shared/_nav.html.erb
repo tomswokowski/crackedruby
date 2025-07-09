@@ -5,7 +5,10 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
       </svg>
     </button>
-    <h1 class="text-lg font-bold">CrackedRuby</h1>
+    <div class="flex items-center gap-2">
+      <img src="/logo.png" alt="CrackedRuby logo" class="h-5 w-auto" />
+      <h1 class="text-lg font-bold">CrackedRuby</h1>
+    </div>
   </header>
 
   <div 
@@ -26,9 +29,10 @@
     </button>
 
     <div class="flex-1 p-4 flex flex-col">
-      <h2 class="text-xl font-bold mb-4">CrackedRuby</h2>
-
-      <!-- Add nav links here if needed -->
+      <div class="flex items-center gap-2 mb-4">
+        <img src="/logo.png" alt="CrackedRuby logo" class="h-6 w-auto" />
+        <h2 class="text-xl font-bold">CrackedRuby</h2>
+      </div>
 
       <div class="mt-auto flex flex-col space-y-2">
         <% if user_signed_in? %>
