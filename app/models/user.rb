@@ -1,19 +1,25 @@
 class User < ApplicationRecord
-  devise :omniauthable, omniauth_providers: [:google_oauth2, :github]
+  devise :omniauthable, omniauth_providers: %i[google_oauth2 github]
+
+  before_validation :normalize_email
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   def self.from_omniauth(auth)
-    user = find_by(provider: auth.provider, uid: auth.uid)
-    user ||= find_by(email: auth.info.email)
+    email = auth.info.email.to_s.strip.downcase
 
-    if user
-      user.update(provider: auth.provider, uid: auth.uid) if user.provider.blank? || user.uid.blank?
-      user
-    else
-      create(
-        email: auth.info.email,
-        provider: auth.provider,
-        uid: auth.uid
-      )
+    verified = auth.info.email_verified
+    verified ||= auth.extra.all_emails&.any? do |e|
+      e["email"].to_s.strip.downcase == email && e["verified"] == true
     end
+
+    raise "Unverified email from OAuth provider" unless verified
+
+    find_or_create_by!(email: email)
+  end
+
+  private
+
+  def normalize_email
+    self.email = email.to_s.strip.downcase
   end
 end
