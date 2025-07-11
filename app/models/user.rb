@@ -4,6 +4,8 @@ class User < ApplicationRecord
   before_validation :normalize_email
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+  ADMIN_EMAIL = ENV.fetch("ADMIN_EMAIL")
+
   def self.from_omniauth(auth)
     email = auth.info.email.to_s.strip.downcase
 
@@ -15,6 +17,10 @@ class User < ApplicationRecord
     raise "Unverified email from OAuth provider" unless verified
 
     find_or_create_by!(email: email)
+  end
+
+  def admin?
+    email == ADMIN_EMAIL
   end
 
   private
