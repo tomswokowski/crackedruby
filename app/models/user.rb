@@ -13,12 +13,9 @@ class User < ApplicationRecord
     verified ||= auth.extra.all_emails&.any? do |e|
       e["email"].to_s.strip.downcase == email && e["verified"] == true
     end
-
     raise "Unverified email from OAuth provider" unless verified
 
-    user = find_or_create_by!(email: email)
-    remember_me(user)
-    user
+    find_or_create_by!(email: email)
   end
 
   def admin?
