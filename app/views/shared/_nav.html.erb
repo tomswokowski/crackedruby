@@ -1,8 +1,16 @@
 <div data-controller="drawer sign-in-modal" class="flex flex-col w-full">
-  <header data-controller="header" class="fixed top-0 left-0 right-0 bg-white text-gray-900 flex items-center justify-start p-4 z-40 shadow-md transform transition-transform duration-300 md:hidden">
+  <header data-controller="header"
+          class="fixed top-0 left-0 right-0 bg-white text-gray-900 flex items-center justify-start p-4 z-40 shadow-md transform transition-transform duration-300 md:hidden">
     <button class="mr-4 cursor-pointer" data-action="click->drawer#toggle">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+      <svg xmlns="http://www.w3.org/2000/svg"
+           class="h-6 w-6 text-gray-900"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="1.5"
+           stroke="currentColor">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
       </svg>
     </button>
     <div class="flex items-center gap-2">
@@ -11,22 +19,16 @@
     </div>
   </header>
 
-  <div 
-    data-drawer-target="backdrop"
-    data-action="click->drawer#close"
-    class="fixed inset-0 bg-black/20 z-40 hidden md:hidden"></div>
+  <div data-drawer-target="backdrop"
+       data-action="click->drawer#close"
+       class="fixed inset-0 bg-black/20 z-40 hidden md:hidden"></div>
 
-  <nav
-    id="nav"
-    class="fixed inset-y-0 left-0 w-64 bg-white text-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col shadow-md"
-    data-drawer-target="panel">
-
-    <button
-      class="absolute top-4 right-[-2.5rem] bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center md:hidden z-50 hidden cursor-pointer"
-      data-drawer-target="closeButton"
-      data-action="click->drawer#close">
-      ✕
-    </button>
+  <nav id="nav"
+       class="fixed inset-y-0 left-0 w-64 bg-white text-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col shadow-md"
+       data-drawer-target="panel">
+    <button class="absolute top-4 right-[-2.5rem] bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center md:hidden hidden cursor-pointer"
+            data-drawer-target="closeButton"
+            data-action="click->drawer#close">✕</button>
 
     <div class="flex-1 p-4 flex flex-col">
       <div class="flex items-center gap-2 mb-4">
@@ -34,23 +36,27 @@
         <h2 class="text-xl font-bold">CrackedRuby</h2>
       </div>
 
-      <!-- Add nav links here if needed -->
+      <div class="flex flex-col space-y-2 mb-6">
+        <%= link_to "Learn Ruby", lessons_path, class: "nav-link text-gray-700 hover:text-red-600" %>
+        <%= link_to "Software Development", articles_path, class: "nav-link text-gray-700 hover:text-red-600" %>
+        <%= link_to "Personal Blog", posts_path, class: "nav-link text-gray-700 hover:text-red-600" %>
+        <%= link_to "About", about_path, class: "nav-link text-gray-700 hover:text-red-600" %>
+        <% if current_user&.admin? %>
+          <%= link_to "Admin", admin_path, class: "nav-link text-red-700 font-semibold hover:text-red-900" %>
+        <% end %>
+      </div>
 
-      <div class="mt-auto flex flex-col space-y-2">
+      <div class="mt-auto flex flex-col space-y-2 text-sm">
         <% if user_signed_in? %>
-          <p class="text-xs text-gray-600">Signed in as <%= current_user.email %></p>
+          <p class="text-gray-600">Signed in as <strong><%= current_user.email %></strong></p>
           <%= button_to "Sign out",
-            destroy_user_session_path,
-            method: :delete,
-            data: { turbo: false },
-            class: "nav-link bg-transparent border-0 p-0"
-          %>
+                        destroy_user_session_path,
+                        method: :delete,
+                        data: { turbo: false },
+                        class: "nav-link bg-transparent border-0 p-0 text-blue-600 hover:underline" %>
         <% else %>
-          <button
-            class="nav-link flex items-center gap-1"
-            data-action="click->sign-in-modal#open">
-            Sign In
-          </button>
+          <button class="nav-link text-blue-600 hover:underline"
+                  data-action="click->sign-in-modal#open">Sign In</button>
         <% end %>
       </div>
     </div>
