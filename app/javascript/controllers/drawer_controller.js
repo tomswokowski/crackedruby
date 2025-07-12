@@ -30,11 +30,13 @@ export default class extends Controller {
     this.panelTarget.classList.remove("-translate-x-full")
     this.backdropTarget.classList.remove("hidden")
     this.closeButtonTarget.classList.remove("hidden")
+    document.body.classList.add("overflow-hidden")
   }
 
   close() {
     this.panelTarget.classList.add("-translate-x-full")
     this.backdropTarget.classList.add("hidden")
     this.closeButtonTarget.classList.add("hidden")
+    document.body.classList.remove("overflow-hidden")
   }
 }
