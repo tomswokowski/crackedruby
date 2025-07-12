@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "settings/index"
   root "home#index"
 
   get "up", to: "rails/health#show", as: :rails_health_check
@@ -10,6 +11,11 @@ Rails.application.routes.draw do
   resources :lessons,  only: %i[index show], path: "learn-ruby"
   resources :articles, only: %i[index show], path: "software-development"
   resources :posts,    only: %i[index show], path: "blog"
+
+  # Authenticated routes
+  authenticate :user do
+    get "settings", to: "settings#index", as: :settings
+  end
 
   # Admin dashboard
   get "admin", to: "admin#dashboard", as: :admin
