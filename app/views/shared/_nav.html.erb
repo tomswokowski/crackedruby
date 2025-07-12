@@ -14,8 +14,6 @@
   <div data-drawer-target="backdrop" data-action="click->drawer#close" class="fixed inset-0 bg-black/20 z-40 hidden md:hidden"></div>
 
   <nav id="nav" class="fixed inset-y-0 left-0 w-64 bg-white text-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col shadow-md overflow-y-auto" data-drawer-target="panel">
-    <button class="absolute top-4 right-[-2.5rem] bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center md:hidden cursor-pointer" data-drawer-target="closeButton" data-action="click->drawer#close">✕</button>
-
     <div class="flex-1 overflow-y-auto p-4 flex flex-col">
       <div class="mb-6">
         <%= link_to root_path, class: "flex items-center gap-2 cursor-pointer" do %>
