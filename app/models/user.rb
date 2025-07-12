@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  devise :omniauthable, omniauth_providers: %i[google_oauth2 github]
+  devise :omniauthable, :rememberable, omniauth_providers: %i[google_oauth2 github]
 
   before_validation :normalize_email
   validates :email, presence: true, uniqueness: { case_sensitive: false }
@@ -16,7 +16,9 @@ class User < ApplicationRecord
 
     raise "Unverified email from OAuth provider" unless verified
 
-    find_or_create_by!(email: email)
+    user = find_or_create_by!(email: email)
+    remember_me(user)
+    user
   end
 
   def admin?
