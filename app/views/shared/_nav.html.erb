@@ -39,7 +39,7 @@
       <div class="flex flex-col space-y-2 mb-6">
         <%= link_to "Learn Ruby", lessons_path, class: "nav-link text-gray-700 hover:text-red-600" %>
         <%= link_to "Software Development", articles_path, class: "nav-link text-gray-700 hover:text-red-600" %>
-        <%= link_to "Personal Blog", posts_path, class: "nav-link text-gray-700 hover:text-red-600" %>
+        <%= link_to "Blog", posts_path, class: "nav-link text-gray-700 hover:text-red-600" %>
         <%= link_to "About", about_path, class: "nav-link text-gray-700 hover:text-red-600" %>
         <% if current_user&.admin? %>
           <%= link_to "Admin", admin_path, class: "nav-link text-red-700 font-semibold hover:text-red-900" %>
