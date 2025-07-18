@@ -1,16 +1,11 @@
-<div
-  data-sign-in-modal-target="modal"
-  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
-
+<div data-sign-in-modal-target="modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
   <div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4 my-8 p-6 relative">
     <button
       class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
       data-action="click->sign-in-modal#close">
       ✕
     </button>
-
     <h2 class="text-xl font-bold mb-4">Sign in with...</h2>
-
     <!-- Google -->
     <%= form_with url: user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full mb-2" do %>
       <button type="submit" class="btn-oauth">
@@ -23,7 +18,6 @@
         <span>Continue with Google</span>
       </button>
     <% end %>
-
     <!-- GitHub -->
     <%= form_with url: user_github_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full" do %>
       <button type="submit" class="btn-oauth">
@@ -40,6 +34,5 @@
         <span>Continue with GitHub</span>
       </button>
     <% end %>
-
   </div>
 </div>

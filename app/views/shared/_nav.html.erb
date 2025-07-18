@@ -10,9 +10,7 @@
       <h1 class="text-lg font-bold">CrackedRuby</h1>
     <% end %>
   </header>
-
   <div data-drawer-target="backdrop" data-action="click->drawer#close" class="fixed inset-0 bg-black/20 z-40 hidden md:hidden"></div>
-
   <nav id="nav" class="fixed inset-y-0 left-0 w-64 bg-white text-gray-900 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out z-50 flex flex-col shadow-md overflow-y-auto" data-drawer-target="panel">
     <div class="flex-1 overflow-y-auto p-4 flex flex-col">
       <div class="mb-6">
@@ -21,7 +19,6 @@
           <h2 class="text-xl font-bold">CrackedRuby</h2>
         <% end %>
       </div>
-
       <div class="flex flex-col space-y-6 mb-6">
         <details open class="group">
           <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-800 hover:text-red-600 truncate">
@@ -46,7 +43,6 @@
             </li>
           </ul>
         </details>
-
         <details open class="group">
           <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-800 hover:text-red-600 truncate">
             Software Development
@@ -70,7 +66,6 @@
             </li>
           </ul>
         </details>
-
         <details open class="group">
           <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-800 hover:text-red-600 truncate">
             Blog
@@ -94,10 +89,8 @@
             </li>
           </ul>
         </details>
-
         <%= link_to "About", about_path, class: "block font-semibold text-gray-800 hover:text-red-600 truncate cursor-pointer" %>
       </div>
-
       <div class="mt-auto mb-6">
         <% if user_signed_in? %>
           <details class="group">
@@ -128,6 +121,5 @@
       </div>
     </div>
   </nav>
-
   <%= render "shared/sign_in_modal" %>
 </div>

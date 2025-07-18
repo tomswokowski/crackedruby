@@ -5,9 +5,11 @@ export default class extends Controller {
 
   open() {
     this.modalTarget.classList.remove('hidden');
+    this.modalTarget.classList.add('flex');
   }
 
   close() {
+    this.modalTarget.classList.remove('flex');
     this.modalTarget.classList.add('hidden');
   }
 }

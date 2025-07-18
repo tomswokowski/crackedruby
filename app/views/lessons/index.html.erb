@@ -1,10 +1,8 @@
 <h1 class="text-2xl font-bold mb-4">Learn Ruby</h1>
-
 <ul class="space-y-2">
   <% @lessons.each do |lesson| %>
     <li>
-      <%= link_to lesson.title, lesson_path(lesson.slug),
-                  class: "text-blue-600 hover:underline" %>
+      <%= link_to lesson.title, lesson_path(lesson.slug), class: "text-blue-600 hover:underline" %>
     </li>
   <% end %>
 </ul>
