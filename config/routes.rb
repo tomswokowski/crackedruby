@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get "settings/index"
-  root "home#index"
-
-  get "up", to: "rails/health#show", as: :rails_health_check
+  root "pages#home"
 
   # Static pages
   get "about", to: "pages#about", as: :about
