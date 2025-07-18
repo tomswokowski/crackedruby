@@ -1,42 +1,42 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ["panel", "backdrop", "closeButton"]
+  static targets = ['panel', 'backdrop', 'closeButton'];
 
   connect() {
-    this.handleResize = this.handleResize.bind(this)
-    window.addEventListener("resize", this.handleResize)
+    this.handleResize = this.handleResize.bind(this);
+    window.addEventListener('resize', this.handleResize);
   }
 
   disconnect() {
-    window.removeEventListener("resize", this.handleResize)
+    window.removeEventListener('resize', this.handleResize);
   }
 
   handleResize() {
     if (window.innerWidth >= 768) {
-      this.close()
+      this.close();
     }
   }
 
   toggle() {
-    if (this.panelTarget.classList.contains("-translate-x-full")) {
-      this.open()
+    if (this.panelTarget.classList.contains('-translate-x-full')) {
+      this.open();
     } else {
-      this.close()
+      this.close();
     }
   }
 
   open() {
-    this.panelTarget.classList.remove("-translate-x-full")
-    this.backdropTarget.classList.remove("hidden")
-    this.closeButtonTarget.classList.remove("hidden")
-    document.body.classList.add("overflow-hidden")
+    this.panelTarget.classList.remove('-translate-x-full');
+    this.backdropTarget.classList.remove('hidden');
+    this.closeButtonTarget.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
   }
 
   close() {
-    this.panelTarget.classList.add("-translate-x-full")
-    this.backdropTarget.classList.add("hidden")
-    this.closeButtonTarget.classList.add("hidden")
-    document.body.classList.remove("overflow-hidden")
+    this.panelTarget.classList.add('-translate-x-full');
+    this.backdropTarget.classList.add('hidden');
+    this.closeButtonTarget.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
   }
 }
