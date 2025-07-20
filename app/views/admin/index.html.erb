@@ -1,0 +1,19 @@
+<h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="p-6 bg-white shadow rounded-lg">
+    <h2 class="text-xl font-semibold">Posts</h2>
+    <p class="mt-2 text-4xl"><%= @post_count %></p>
+    <%= link_to "Manage Posts", admin_posts_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+  </div>
+  <div class="p-6 bg-white shadow rounded-lg">
+    <h2 class="text-xl font-semibold">Articles</h2>
+    <p class="mt-2 text-4xl"><%= @article_count %></p>
+    <%= link_to "Manage Articles", admin_articles_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+  </div>
+  <div class="p-6 bg-white shadow rounded-lg">
+    <h2 class="text-xl font-semibold">Lessons</h2>
+    <p class="mt-2 text-4xl"><%= @lesson_count %></p>
+    <%= link_to "Manage Lessons", admin_lessons_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+  </div>
+</div>

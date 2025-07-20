@@ -4,18 +4,25 @@ Rails.application.routes.draw do
   # Static pages
   get "about", to: "pages#about", as: :about
 
-  # Resourceful paths
+  # Public Resourceful Paths
   resources :lessons,  only: %i[index show], path: "learn-ruby"
   resources :articles, only: %i[index show], path: "software-development"
   resources :posts,    only: %i[index show], path: "blog"
+
+  # Admin Area
+  authenticate :user, ->(u) { u.admin? } do
+    namespace :admin do
+      root to: "dashboard#index", as: ""
+      resources :posts,    param: :slug
+      resources :articles, param: :slug
+      resources :lessons,  param: :slug
+    end
+  end
 
   # Authenticated routes
   authenticate :user do
     get "settings", to: "settings#index", as: :settings
   end
-
-  # Admin dashboard
-  get "admin", to: "admin#dashboard", as: :admin
 
   # Devise auth
   devise_for :users, controllers: {
