@@ -5,8 +5,8 @@
   Featured:  <%= @post.featured? %>
 </p>
 
-<div class="prose">
-  <%= simple_format(@post.body) %>
+<div class="prose lg:prose-xl">
+  <%== marksmithed(@post.body) %>
 </div>
 
 <div class="mt-6 space-x-2">
