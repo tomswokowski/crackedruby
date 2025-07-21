@@ -16,6 +16,8 @@ gem 'devise'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-github'
+gem "marksmith"
+gem "commonmarker"
 
 group :development, :test do
   gem "dotenv-rails"
