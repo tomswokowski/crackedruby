@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # Admin Routes
   authenticate :user, ->(u) { u.admin? } do
     namespace :admin do
-      root to: "dashboard#index"
+      root to: "home#index"
       resources :posts,    param: :slug
       resources :articles, param: :slug
       resources :lessons,  param: :slug
