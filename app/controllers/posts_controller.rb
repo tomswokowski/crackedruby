@@ -4,8 +4,8 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  # GET /blog/:id
+  # GET /blog/:slug
   def show
-    @post = Post.find_by!(slug: params[:id])
+    @post = Post.find_by!(slug: params[:slug])
   end
 end

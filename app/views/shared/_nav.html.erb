@@ -126,7 +126,7 @@
             </summary>
             <div class="mt-2 ml-2 flex flex-col space-y-1 text-sm">
               <% if current_user.admin? %>
-                <%= link_to "Admin Dashboard", admin_path, class: "block px-2 py-1 hover:bg-gray-100 rounded text-sm text-red-700 cursor-pointer" %>
+                <%= link_to "Admin Dashboard", admin_root_path, class: "block px-2 py-1 hover:bg-gray-100 rounded text-sm text-red-700 cursor-pointer" %>
               <% end %>
               <%= link_to "Settings", settings_path, class: "block px-2 py-1 hover:bg-gray-100 rounded text-sm cursor-pointer" %>
               <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-full text-left px-2 py-1 hover:bg-red-50 hover:text-red-600 rounded text-sm cursor-pointer" %>
