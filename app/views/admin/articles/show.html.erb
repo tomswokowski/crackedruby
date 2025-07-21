@@ -1,0 +1,17 @@
+<h1 class="text-2xl font-bold mb-4"><%= @article.title %></h1>
+<p class="text-sm text-gray-500 mb-2">Slug: <%= @article.slug %></p>
+<p class="text-sm text-gray-500 mb-6">
+  Published: <%= @article.published? %> |
+  Featured:  <%= @article.featured? %>
+</p>
+
+<div class="prose">
+  <%= simple_format(@article.body) %>
+</div>
+
+<div class="mt-6 space-x-2">
+  <%= link_to "Edit", edit_admin_article_path(@article),
+              class: "px-4 py-2 bg-yellow-300 rounded" %>
+  <%= link_to "Back", admin_articles_path,
+              class: "px-4 py-2 bg-gray-200 rounded" %>
+</div>
