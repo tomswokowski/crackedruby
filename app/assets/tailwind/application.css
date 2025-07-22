@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
   html {
@@ -12,35 +14,43 @@
   }
 
   .btn-oauth {
-    @apply w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded bg-white text-gray-800 hover:shadow cursor-pointer;
+    @apply w-full flex items-center justify-center gap-2 px-4 py-2
+           border border-gray-300 rounded bg-white text-gray-800
+           hover:shadow cursor-pointer;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+  }
+  .carousel-wrapper::before,
+  .carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2rem;
+    pointer-events: none;
+  }
+  .carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
+  }
+  .carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
   }
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-wrapper {
-  position: relative;
-}
-.carousel-wrapper::before,
-.carousel-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2rem;
-  pointer-events: none;
-}
-.carousel-wrapper::before {
-  left: 0;
-  background: linear-gradient(to right, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
-}
-.carousel-wrapper::after {
-  right: 0;
-  background: linear-gradient(to left, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
+@layer utilities {
+  .overscroll-x-contain {
+    overscroll-behavior-x: contain;
+  }
 }

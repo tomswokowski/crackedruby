@@ -15,11 +15,11 @@
     <%= stylesheet_link_tag "marksmith", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="flex flex-col bg-gray-50">
+  <body class="flex flex-col">
     <%= render "shared/nav" %>
     <div class="flex flex-1 pt-16 md:pt-0">
-      <main class="flex-1 md:ml-56 p-8">
-        <div class="max-w-6xl mx-auto space-y-16">
+      <main class="flex-1 md:ml-64 px-4 py-4 overflow-x-hidden">
+        <div class="max-w-6xl mx-auto">
           <%= yield %>
         </div>
       </main>
