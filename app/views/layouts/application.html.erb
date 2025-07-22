@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "CrackedRuby" %></title>
+    <title><%= ["CrackedRuby", content_for?(:title) ? yield(:title) : nil].compact.join(" – ") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -18,8 +18,8 @@
   <body class="flex flex-col">
     <%= render "shared/nav" %>
     <div class="flex flex-1 pt-16 md:pt-0">
-      <main class="flex-1 md:ml-64 p-4">
-        <div class="max-w-4xl mx-auto">
+      <main class="flex-1 md:ml-64 px-4 py-4 overflow-x-hidden">
+        <div class="max-w-6xl mx-auto">
           <%= yield %>
         </div>
       </main>

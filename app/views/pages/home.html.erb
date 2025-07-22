@@ -1,28 +1,35 @@
-<div class="prose prose-gray max-w-none">
-  <h1 class="text-3xl sm:text-4xl font-bold mb-6">Welcome to CrackedRuby</h1>
-  <p class="mb-4">
-    This website covers various Computer Science and Web Development topics that are frequently looked at through a Ruby-colored lens.
-  </p>
-  <p class="mb-4">
-    My name is Tom Swokowski (<a href="https://x.com/tomswokowski" class="underline text-blue-600" target="_blank" rel="noopener">@tomswokowski</a>).
-    This site is a personal space where I share and experiment with random things I’m interested in.
-  </p>
-  <h2 class="text-2xl font-semibold mt-8 mb-2">A couple more things:</h2>
-  <h3 class="text-xl font-semibold mt-6 mb-2">Why this site?</h3>
-  <p class="mb-4">
-    I’m making this site to express my passion as a software developer and to share my ideas with other like-minded individuals.
-    I also believe that working on complex features that stretch my current ability is the best way to become a better developer.
-  </p>
-  <h3 class="text-xl font-semibold mt-6 mb-2">Why Ruby?</h3>
-  <p class="mb-4">
-    Ruby gets me to keep coming back and wanting to open my computer to read and write it.
-    I don’t feel any other reason or justification is needed.
-  </p>
-  <h3 class="text-xl font-semibold mt-6 mb-2">Is this site just AI slop?</h3>
-  <p class="mb-4">
-    Every word on this website is genuinely written by me. Unless it’s contextually obvious,
-    I’ll be radically transparent if there is any AI-generated text present. A curious viewer can check out the
-    <a href="https://github.com/tomswokowski/crackedruby" class="underline text-blue-600" target="_blank" rel="noopener">code</a>,
-    which is completely public.
-  </p>
+<% content_for :title, "Learning Ruby Among Other Things" %>
+
+<div class="space-y-12">
+  <!-- Latest Content -->
+  <section class="mb-6">
+    <h2 class="text-2xl font-bold mb-4">Latest Content</h2>
+    <div class="flex overflow-x-auto gap-4 pb-4 px-2 no-scrollbar relative">
+      <%= render partial: "shared/card", collection: @latest_entries, as: :item %>
+    </div>
+  </section>
+
+  <!-- Learn Ruby -->
+  <section class="mb-6">
+    <h2 class="text-2xl font-bold mb-4">Learn Ruby</h2>
+    <div class="flex overflow-x-auto gap-4 pb-4 px-2 no-scrollbar relative">
+      <%= render partial: "shared/card", collection: @latest_lessons, as: :item %>
+    </div>
+  </section>
+
+  <!-- Software Development -->
+  <section class="mb-6">
+    <h2 class="text-2xl font-bold mb-4">Software Development</h2>
+    <div class="flex overflow-x-auto gap-4 pb-4 px-2 no-scrollbar relative">
+      <%= render partial: "shared/card", collection: @latest_articles, as: :item %>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Blog</h2>
+    <div class="flex overflow-x-auto gap-4 pb-4 px-2 no-scrollbar relative">
+      <%= render partial: "shared/card", collection: @latest_posts, as: :item %>
+    </div>
+  </section>
 </div>
