@@ -1,55 +1,22 @@
 <% content_for :title, "Learning Ruby Among Other Things" %>
 
-<div class="space-y-12">
-  <!-- Latest Content -->
-  <section class="bg-white py-8">
-    <div class="px-4 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-indigo-300 inline-block pb-2">
-        Latest Content
-      </h2>
+<div class="space-y-16">
+  <% [
+    ["Latest Content",         @latest_entries],
+    ["Learn Ruby",             @latest_lessons],
+    ["Software Development",   @latest_articles],
+    ["Blog",                   @latest_posts]
+  ].each do |title, collection| %>
+    <section>
+      <div class="-mx-4 sm:-mx-6 px-4 sm:px-6 space-y-4">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+          <%= title %>
+        </h2>
 
-      <div class="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 snap-x snap-mandatory no-scrollbar">
-        <%= render partial: "shared/card", collection: @latest_entries, as: :item %>
+        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar">
+          <%= render partial: "shared/card", collection: collection, as: :item %>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Learn Ruby -->
-  <section class="bg-gray-50 py-8">
-    <div class="px-4 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-indigo-300 inline-block pb-2">
-        Learn Ruby
-      </h2>
-
-      <div class="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 snap-x snap-mandatory no-scrollbar">
-        <%= render partial: "shared/card", collection: @latest_lessons, as: :item %>
-      </div>
-    </div>
-  </section>
-
-  <!-- Software Development -->
-  <section class="bg-white py-8">
-    <div class="px-4 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-indigo-300 inline-block pb-2">
-        Software Development
-      </h2>
-
-      <div class="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 snap-x snap-mandatory no-scrollbar">
-        <%= render partial: "shared/card", collection: @latest_articles, as: :item %>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog -->
-  <section class="bg-gray-50 py-8">
-    <div class="px-4 max-w-6xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-gray-900 mb-8 border-b-4 border-indigo-300 inline-block pb-2">
-        Blog
-      </h2>
-
-      <div class="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 snap-x snap-mandatory no-scrollbar">
-        <%= render partial: "shared/card", collection: @latest_posts, as: :item %>
-      </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
 </div>
