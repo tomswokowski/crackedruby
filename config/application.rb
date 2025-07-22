@@ -15,8 +15,8 @@ module Crackedruby
 
     # Redirect www to apex domain (hardcoded for now)
     config.middleware.insert_before Rack::Runtime, Rack::Rewrite do
-      r301 %r{.*}, 'https://crackedruby.com$&', if: Proc.new { |rack_env|
-        rack_env['SERVER_NAME'].start_with?('www.')
+      r301 %r{.*}, "https://crackedruby.com$&", if: Proc.new { |rack_env|
+        rack_env["SERVER_NAME"].start_with?("www.")
       }
     end
   end
