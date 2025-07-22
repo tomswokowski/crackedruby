@@ -2,18 +2,20 @@
 
 <div class="space-y-16">
   <% [
-    ["Latest Content",         @latest_entries],
-    ["Learn Ruby",             @latest_lessons],
-    ["Software Development",   @latest_articles],
-    ["Blog",                   @latest_posts]
+    ["Latest Content", @latest_entries],
+    ["Learn Ruby",     @latest_lessons],
+    ["Software Dev",   @latest_articles],
+    ["Blog",           @latest_posts]
   ].each do |title, collection| %>
     <section>
       <div class="-mx-4 sm:-mx-6 px-4 sm:px-6 space-y-4">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+        <h2 class="text-2xl font-bold text-gray-900 mb-2
+                   border-b border-gray-300 pb-1">
           <%= title %>
         </h2>
 
-        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar">
+        <div class="carousel-wrapper flex overflow-x-auto gap-4 pb-4
+                    snap-x snap-mandatory no-scrollbar">
           <%= render partial: "shared/card", collection: collection, as: :item %>
         </div>
       </div>

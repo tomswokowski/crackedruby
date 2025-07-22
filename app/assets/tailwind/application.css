@@ -15,3 +15,32 @@
     @apply w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded bg-white text-gray-800 hover:shadow cursor-pointer;
   }
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-wrapper {
+  position: relative;
+}
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  pointer-events: none;
+}
+.carousel-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
+}
+.carousel-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--tw-bg-opacity, 1) 0%, rgba(245, 245, 245, 0) 100%);
+}
