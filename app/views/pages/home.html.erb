@@ -4,7 +4,7 @@
   <% [
     ["Latest Content",       @latest_entries,    nil],
     ["Learn Ruby",           @latest_lessons,    lessons_path],
-    ["Software Development", @latest_articles,   articles_path],
+    ["Software Dev",         @latest_articles,   articles_path],
     ["Blog",                 @latest_posts,      posts_path]
   ].each do |heading, collection, path| %>
     <%= render "shared/carousel", heading: heading, collection: collection, path: path %>
