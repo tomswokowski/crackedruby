@@ -7,29 +7,6 @@
     ["Software Development", @latest_articles,   articles_path],
     ["Blog",                 @latest_posts,      posts_path]
   ].each do |heading, collection, path| %>
-    <section>
-      <div class="-mx-4 sm:-mx-6 px-4 sm:px-6 space-y-4">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2 border-b border-gray-200 pb-1">
-          <%= heading %>
-        </h2>
-
-        <div data-controller="carousel" class="relative">
-          <div
-            data-carousel-target="pane"
-            class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar"
-          >
-            <%= render partial: "shared/card",       collection: collection, as: :item %>
-            <%= render partial: "shared/view_all_card",
-                      locals: { path: path, label: heading } if path %>
-          </div>
-
-          <div
-            data-carousel-target="fade"
-            class="hidden md:block absolute inset-y-0 right-0 w-16
-                  pointer-events-none bg-gradient-to-l from-white to-transparent"
-          ></div>
-        </div>
-      </div>
-    </section>
+    <%= render "shared/carousel", heading: heading, collection: collection, path: path %>
   <% end %>
 </div>
