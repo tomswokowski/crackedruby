@@ -15,7 +15,7 @@
     <%= stylesheet_link_tag "marksmith", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="flex flex-col">
+  <body class="flex flex-col min-h-screen">
     <%= render "shared/nav" %>
     <div class="flex flex-1 pt-16 md:pt-0">
       <main class="flex-1 md:ml-64 px-4 py-4 overflow-x-hidden">
@@ -24,5 +24,9 @@
         </div>
       </main>
     </div>
+
+    <footer class="text-center text-sm text-gray-500 py-2">
+      &copy; <%= Time.current.year %> CrackedRuby
+    </footer>
   </body>
 </html>
