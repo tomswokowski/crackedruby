@@ -2,19 +2,21 @@
 
 <div class="space-y-8 mb-16">
   <% [
-    ["Latest Content",         @latest_entries],
-    ["Learn Ruby",             @latest_lessons],
-    ["Software Development",   @latest_articles],
-    ["Blog",                   @latest_posts]
-  ].each do |title, collection| %>
+    ["Latest Content",       @latest_entries,    nil],
+    ["Learn Ruby",           @latest_lessons,    lessons_path],
+    ["Software Development", @latest_articles,   articles_path],
+    ["Blog",                 @latest_posts,      posts_path]
+  ].each do |heading, collection, path| %>
     <section>
       <div class="-mx-4 sm:-mx-6 px-4 sm:px-6 space-y-4">
         <h2 class="text-2xl font-bold text-gray-900 mb-2 border-b border-gray-200 pb-1">
-          <%= title %>
+          <%= heading %>
         </h2>
 
         <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar">
-          <%= render partial: "shared/card", collection: collection, as: :item %>
+          <%= render partial: "shared/card",       collection: collection, as: :item %>
+          <%= render partial: "shared/view_all_card",
+                     locals: { path: path, label: heading } if path %>
         </div>
       </div>
     </section>
