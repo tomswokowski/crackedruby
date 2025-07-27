@@ -39,4 +39,10 @@ export default class extends Controller {
     this.closeButtonTarget.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
   }
+
+  toggleDesktop() {
+    if (window.innerWidth < 768) return;
+    this.panelTarget.classList.toggle('collapsed-sidebar');
+    document.body.classList.toggle('sidebar-collapsed');
+  }
 }

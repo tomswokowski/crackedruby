@@ -30,4 +30,39 @@
   .overscroll-x-contain {
     overscroll-behavior-x: contain;
   }
+
+  @media (min-width: 768px) {
+    .collapsed-sidebar {
+      width: 4rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  body.sidebar-collapsed main {
+    margin-left: 4rem;
+  }
+
+  body main {
+    transition: margin-left 0.2s ease-in-out;
+  }
+}
+
+@media (min-width: 768px) {
+  .collapsed-sidebar .menu-content {
+    display: none;
+  }
+
+  .collapsed-sidebar .logo-container {
+    justify-content: center;
+  }
+
+  .collapsed-sidebar .logo-arrow {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .collapsed-sidebar .logo-container:hover .logo-arrow {
+    opacity: 1;
+  }
 }
