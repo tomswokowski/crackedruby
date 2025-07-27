@@ -50,15 +50,27 @@
 
 @media (min-width: 768px) {
   .collapsed-sidebar .logo-container {
-    justify-content: center;
+    justify-content: flex-start;
+    position: relative;
   }
 
   .collapsed-sidebar .logo-arrow {
     opacity: 0;
+    position: absolute;
+    right: 0.5rem;
     transition: opacity 0.2s ease-in-out;
   }
 
-  .collapsed-sidebar:hover .logo-arrow {
+  .collapsed-sidebar .logo-container:hover .logo-arrow {
     opacity: 1;
+  }
+
+  .collapsed-sidebar .logo-container:hover img {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .collapsed-sidebar img {
+    transition: opacity 0.2s ease-in-out;
   }
 }
