@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static targets = ['panel', 'backdrop', 'closeButton'];
+  static targets = ['panel', 'backdrop', 'closeButton', 'menuContent'];
 
   connect() {
     this.handleResize = this.handleResize.bind(this);
@@ -42,7 +42,21 @@ export default class extends Controller {
 
   toggleDesktop() {
     if (window.innerWidth < 768) return;
-    this.panelTarget.classList.toggle('collapsed-sidebar');
-    document.body.classList.toggle('sidebar-collapsed');
+
+    const isCollapsed = this.panelTarget.classList.contains('collapsed-sidebar');
+
+    if (isCollapsed) {
+      this.panelTarget.classList.remove('collapsed-sidebar');
+      this.menuContentTargets.forEach((element) => {
+        element.classList.remove('hidden');
+      });
+      document.body.classList.remove('sidebar-collapsed');
+    } else {
+      this.panelTarget.classList.add('collapsed-sidebar');
+      this.menuContentTargets.forEach((element) => {
+        element.classList.add('hidden');
+      });
+      document.body.classList.add('sidebar-collapsed');
+    }
   }
 }

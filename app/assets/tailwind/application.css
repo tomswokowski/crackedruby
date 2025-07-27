@@ -33,7 +33,7 @@
 
   @media (min-width: 768px) {
     .collapsed-sidebar {
-      width: 4rem;
+      width: 4rem !important;
     }
   }
 }
@@ -49,10 +49,6 @@
 }
 
 @media (min-width: 768px) {
-  .collapsed-sidebar .menu-content {
-    display: none;
-  }
-
   .collapsed-sidebar .logo-container {
     justify-content: center;
   }
@@ -62,7 +58,7 @@
     transition: opacity 0.2s ease-in-out;
   }
 
-  .collapsed-sidebar .logo-container:hover .logo-arrow {
+  .collapsed-sidebar:hover .logo-arrow {
     opacity: 1;
   }
 }
