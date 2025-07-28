@@ -1,13 +1,13 @@
 <div class="mb-6 flex items-center justify-between logo-container">
   <%= link_to root_path, class: "flex items-center gap-2 cursor-pointer" do %>
     <img src="/logo.png" alt="CrackedRuby logo" class="h-7 w-auto flex-shrink-0" />
-    <h2 class="text-xl font-bold logo-text" data-drawer-target="menuContent">CrackedRuby</h2>
+    <h2 class="text-xl font-bold logo-text" data-navigation-drawer-target="menuContent">CrackedRuby</h2>
   <% end %>
 
   <button
     type="button"
     class="hidden md:flex ml-auto hover:bg-gray-100 rounded cursor-pointer flex-shrink-0 sidebar-toggle"
-    data-action="click->drawer#toggleDesktop"
+    data-action="click->navigation-drawer#toggleDesktop"
     aria-label="Toggle sidebar"
   >
     <svg

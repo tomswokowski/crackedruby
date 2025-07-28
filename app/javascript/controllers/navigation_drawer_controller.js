@@ -16,6 +16,7 @@ export default class extends Controller {
     if (window.innerWidth >= 768) {
       this.close();
     } else {
+      // Reset collapsed state when switching to mobile
       this.panelTarget.classList.remove('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
         element.classList.remove('hidden');
