@@ -12,7 +12,8 @@
   <%= render "shared/nav/menu_section", 
       title: "Blog", 
       items: Post.where(featured: true).limit(3), 
-      view_all_path: posts_path %>
+      view_all_path: posts_path,
+      open: false %>
   
   <div class="border-t border-gray-200 pt-4 mt-2">
     <%= link_to "About", about_path, class: "block font-semibold text-gray-800 hover:text-red-600 truncate cursor-pointer" %>

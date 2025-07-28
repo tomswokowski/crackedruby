@@ -1,4 +1,4 @@
-<details open class="menu-section">
+<details <%= 'open' if local_assigns[:open] != false %> class="menu-section">
   <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-800 truncate group">
     <%= title %>
     <span class="flex-shrink-0">
