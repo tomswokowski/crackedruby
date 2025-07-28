@@ -1,3 +1,20 @@
+/* Menu section hover effects */
+.menu-section summary.group:hover .arrow-icon {
+  color: #dc2626; /* red-600 */
+}
+
+.menu-section .arrow-down {
+  display: none;
+}
+
+.menu-section[open] .arrow-right {
+  display: none;
+}
+
+.menu-section[open] .arrow-down {
+  display: inline;
+}
+
 /* Desktop navigation responsive styles */
 @media (min-width: 768px) {
   body.sidebar-collapsed main {
