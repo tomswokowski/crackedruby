@@ -1,0 +1,11 @@
+@layer base {
+  html {
+    font-family: 'Sora', sans-serif;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-sm text-gray-700 hover:text-black transition text-left underline underline-offset-2 cursor-pointer;
+  }
+}

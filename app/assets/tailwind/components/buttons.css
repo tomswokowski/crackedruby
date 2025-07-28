@@ -1,0 +1,7 @@
+@layer components {
+  .btn-oauth {
+    @apply w-full flex items-center justify-center gap-2 px-4 py-2
+           border border-gray-300 rounded bg-white text-gray-800
+           hover:shadow cursor-pointer;
+  }
+}

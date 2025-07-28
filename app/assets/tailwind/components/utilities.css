@@ -1,0 +1,23 @@
+@layer components {
+  /* Scrollbar utilities */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .overscroll-x-contain {
+    overscroll-behavior-x: contain;
+  }
+
+  /* Navigation specific utilities */
+  @media (min-width: 768px) {
+    .collapsed-sidebar {
+      width: 4rem !important;
+    }
+  }
+}
