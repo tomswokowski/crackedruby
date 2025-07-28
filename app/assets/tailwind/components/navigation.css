@@ -1,6 +1,5 @@
-/* Menu section hover effects */
 .menu-section summary.group:hover .arrow-icon {
-  color: #dc2626; /* red-600 */
+  color: #dc2626;
 }
 
 .menu-section .arrow-down {
@@ -15,7 +14,6 @@
   display: inline;
 }
 
-/* Desktop navigation responsive styles */
 @media (min-width: 768px) {
   body.sidebar-collapsed main {
     margin-left: 4rem;
@@ -26,7 +24,6 @@
   }
 }
 
-/* Collapsed sidebar styles */
 @media (min-width: 768px) {
   .collapsed-sidebar .logo-container {
     justify-content: center;
