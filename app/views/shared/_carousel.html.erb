@@ -9,9 +9,10 @@
         data-carousel-target="pane"
         class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar"
       >
-        <%= render partial: "shared/card",       collection: collection, as: :item %>
-        <%= render partial: "shared/view_all_card",
-                   locals: { path: path, label: heading } if path %>
+        <%= render partial: "shared/carousel/content_card",
+            collection: collection, as: :item %>
+        <%= render "shared/carousel/view_all_card", 
+            path: path, heading: heading if path %>
       </div>
 
       <div

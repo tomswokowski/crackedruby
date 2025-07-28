@@ -1,10 +1,4 @@
-<% link_target = case item
-  when Post    then post_path(item.slug)
-  when Article then article_path(item.slug)
-  when Lesson  then lesson_path(item.slug)
-end %>
-
-<%= link_to link_target,
+<%= link_to send("#{item.class.name.downcase}_path", item.slug),
             class: "group snap-start block flex-shrink-0 last:mr-8
                     w-72 sm:w-80 md:w-96" do %>
   <div class="h-full bg-white border border-gray-200 rounded-xl p-6
