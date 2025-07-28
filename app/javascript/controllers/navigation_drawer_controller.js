@@ -6,6 +6,7 @@ export default class extends Controller {
   connect() {
     this.handleResize = this.handleResize.bind(this);
     window.addEventListener('resize', this.handleResize);
+    this.restoreSidebarState();
   }
 
   disconnect() {
@@ -15,6 +16,7 @@ export default class extends Controller {
   handleResize() {
     if (window.innerWidth >= 768) {
       this.close();
+      this.restoreDesktopState();
     } else {
       this.panelTarget.classList.remove('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
@@ -52,17 +54,51 @@ export default class extends Controller {
     const isCollapsed = this.panelTarget.classList.contains('collapsed-sidebar');
 
     if (isCollapsed) {
-      this.panelTarget.classList.remove('collapsed-sidebar');
-      this.menuContentTargets.forEach((element) => {
-        element.classList.remove('hidden');
-      });
-      document.body.classList.remove('sidebar-collapsed');
+      this.expandSidebar();
     } else {
+      this.collapseSidebar();
+    }
+  }
+
+  expandSidebar() {
+    this.panelTarget.classList.remove('collapsed-sidebar');
+    this.menuContentTargets.forEach((element) => {
+      element.classList.remove('hidden');
+    });
+    document.body.classList.remove('sidebar-collapsed');
+    sessionStorage.setItem('sidebarCollapsed', 'false');
+  }
+
+  collapseSidebar() {
+    this.panelTarget.classList.add('collapsed-sidebar');
+    this.menuContentTargets.forEach((element) => {
+      element.classList.add('hidden');
+    });
+    document.body.classList.add('sidebar-collapsed');
+    sessionStorage.setItem('sidebarCollapsed', 'true');
+  }
+
+  restoreSidebarState() {
+    if (window.innerWidth >= 768) {
+      this.restoreDesktopState();
+    }
+  }
+
+  restoreDesktopState() {
+    const isCollapsed = sessionStorage.getItem('sidebarCollapsed') === 'true';
+
+    if (isCollapsed) {
       this.panelTarget.classList.add('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
         element.classList.add('hidden');
       });
       document.body.classList.add('sidebar-collapsed');
+    } else {
+      this.panelTarget.classList.remove('collapsed-sidebar');
+      this.menuContentTargets.forEach((element) => {
+        element.classList.remove('hidden');
+      });
+      document.body.classList.remove('sidebar-collapsed');
     }
   }
 }
