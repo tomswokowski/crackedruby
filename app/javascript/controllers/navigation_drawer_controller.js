@@ -35,10 +35,24 @@ export default class extends Controller {
           this.panelTarget.style.transition = '';
           document.body.style.transition = '';
           if (mainElement) mainElement.style.transition = '';
-        }, 50);
+          this.hideLoadingOverlay();
+        }, 100);
       } else {
         this.restoreExpandedState();
+        this.hideLoadingOverlay();
       }
+    } else {
+      this.hideLoadingOverlay();
+    }
+  }
+
+  hideLoadingOverlay() {
+    const overlay = document.getElementById('pageLoadingOverlay');
+    if (overlay) {
+      overlay.classList.add('hidden');
+      setTimeout(() => {
+        overlay.remove();
+      }, 300);
     }
   }
 
