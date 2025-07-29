@@ -6,6 +6,8 @@ export default class extends Controller {
     this.handleScroll = this.handleScroll.bind(this);
     window.addEventListener('scroll', this.handleScroll);
     this.threshold = 100;
+    this.tolerance = 5;
+    this.ticking = false;
   }
 
   disconnect() {
@@ -13,16 +15,32 @@ export default class extends Controller {
   }
 
   handleScroll() {
-    const currentScroll = window.scrollY;
+    if (!this.ticking) {
+      requestAnimationFrame(() => {
+        this.updateHeader();
+        this.ticking = false;
+      });
+      this.ticking = true;
+    }
+  }
 
-    if (currentScroll <= this.threshold) {
-      this.element.classList.remove('-translate-y-full');
+  updateHeader() {
+    const currentScroll = window.scrollY;
+    const scrollDifference = Math.abs(currentScroll - this.lastScroll);
+
+    if (scrollDifference < this.tolerance) {
       return;
     }
 
-    if (currentScroll > this.lastScroll) {
+    if (currentScroll <= this.threshold) {
+      this.element.classList.remove('-translate-y-full');
+      this.lastScroll = currentScroll;
+      return;
+    }
+
+    if (currentScroll > this.lastScroll && scrollDifference > this.tolerance) {
       this.element.classList.add('-translate-y-full');
-    } else {
+    } else if (currentScroll < this.lastScroll && scrollDifference > this.tolerance) {
       this.element.classList.remove('-translate-y-full');
     }
 
