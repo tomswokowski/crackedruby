@@ -6,6 +6,8 @@ export default class extends Controller {
   connect() {
     this.handleResize = this.handleResize.bind(this);
     window.addEventListener('resize', this.handleResize);
+    this.lastDesktopCollapsedState = false;
+    this.wasDesktop = window.innerWidth >= 768;
   }
 
   disconnect() {
@@ -13,16 +15,37 @@ export default class extends Controller {
   }
 
   handleResize() {
-    if (window.innerWidth >= 768) {
+    const isDesktop = window.innerWidth >= 768;
+
+    if (isDesktop && !this.wasDesktop) {
       this.close();
-      this.restoreDesktopState();
-    } else {
+
+      if (this.lastDesktopCollapsedState) {
+        this.panelTarget.classList.add('collapsed-sidebar');
+        this.menuContentTargets.forEach((element) => {
+          element.classList.add('hidden');
+        });
+        document.body.classList.add('sidebar-collapsed');
+      } else {
+        this.panelTarget.classList.remove('collapsed-sidebar');
+        this.menuContentTargets.forEach((element) => {
+          element.classList.remove('hidden');
+        });
+        document.body.classList.remove('sidebar-collapsed');
+      }
+    } else if (!isDesktop && this.wasDesktop) {
+      this.lastDesktopCollapsedState = this.panelTarget.classList.contains('collapsed-sidebar');
+
       this.panelTarget.classList.remove('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
         element.classList.remove('hidden');
       });
       document.body.classList.remove('sidebar-collapsed');
+    } else if (!isDesktop) {
+      this.close();
     }
+
+    this.wasDesktop = isDesktop;
   }
 
   toggle() {
@@ -65,6 +88,7 @@ export default class extends Controller {
       element.classList.remove('hidden');
     });
     document.body.classList.remove('sidebar-collapsed');
+    this.lastDesktopCollapsedState = false;
   }
 
   collapseSidebar() {
@@ -73,13 +97,6 @@ export default class extends Controller {
       element.classList.add('hidden');
     });
     document.body.classList.add('sidebar-collapsed');
-  }
-
-  restoreDesktopState() {
-    this.panelTarget.classList.remove('collapsed-sidebar');
-    this.menuContentTargets.forEach((element) => {
-      element.classList.remove('hidden');
-    });
-    document.body.classList.remove('sidebar-collapsed');
+    this.lastDesktopCollapsedState = true;
   }
 }
