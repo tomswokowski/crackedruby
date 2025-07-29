@@ -18,10 +18,6 @@
   body.sidebar-collapsed main {
     margin-left: 4rem;
   }
-
-  body main {
-    transition: margin-left 0.2s ease-in-out;
-  }
 }
 
 @media (min-width: 768px) {
