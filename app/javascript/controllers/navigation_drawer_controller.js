@@ -7,18 +7,8 @@ export default class extends Controller {
     this.handleResize = this.handleResize.bind(this);
     window.addEventListener('resize', this.handleResize);
 
-    const savedState = sessionStorage.getItem('sidebarCollapsed');
-    this.lastDesktopCollapsedState = savedState === 'true';
-
+    this.lastDesktopCollapsedState = false;
     this.wasDesktop = window.innerWidth >= 768;
-
-    if (this.wasDesktop && this.lastDesktopCollapsedState) {
-      this.panelTarget.classList.add('collapsed-sidebar');
-      this.menuContentTargets.forEach((element) => {
-        element.classList.add('hidden');
-      });
-      document.body.classList.add('sidebar-collapsed');
-    }
   }
 
   disconnect() {
@@ -111,7 +101,6 @@ export default class extends Controller {
     });
     document.body.classList.remove('sidebar-collapsed');
     this.lastDesktopCollapsedState = false;
-    sessionStorage.setItem('sidebarCollapsed', 'false');
   }
 
   collapseSidebar() {
@@ -121,6 +110,5 @@ export default class extends Controller {
     });
     document.body.classList.add('sidebar-collapsed');
     this.lastDesktopCollapsedState = true;
-    sessionStorage.setItem('sidebarCollapsed', 'true');
   }
 }
