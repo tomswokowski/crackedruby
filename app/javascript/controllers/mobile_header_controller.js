@@ -6,6 +6,7 @@ export default class extends Controller {
     this.handleScroll = this.handleScroll.bind(this);
     window.addEventListener('scroll', this.handleScroll);
     this.threshold = 100;
+    this.tolerance = 5;
   }
 
   disconnect() {
@@ -17,6 +18,7 @@ export default class extends Controller {
     const documentHeight = document.documentElement.scrollHeight;
     const windowHeight = window.innerHeight;
     const distanceFromBottom = documentHeight - (currentScroll + windowHeight);
+    const scrollDifference = Math.abs(currentScroll - this.lastScroll);
 
     if (currentScroll <= this.threshold) {
       this.element.classList.remove('-translate-y-full');
@@ -27,6 +29,10 @@ export default class extends Controller {
     if (distanceFromBottom <= this.threshold) {
       this.element.classList.remove('-translate-y-full');
       this.lastScroll = currentScroll;
+      return;
+    }
+
+    if (scrollDifference < this.tolerance) {
       return;
     }
 
