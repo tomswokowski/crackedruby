@@ -57,3 +57,16 @@
     transition: opacity 0.2s ease-in-out;
   }
 }
+
+@media (max-width: 767px) {
+  [data-controller='mobile-header']::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-color: white;
+    z-index: -1;
+  }
+}
