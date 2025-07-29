@@ -5,7 +5,7 @@ export default class extends Controller {
     this.lastScroll = window.scrollY;
     this.handleScroll = this.handleScroll.bind(this);
     window.addEventListener('scroll', this.handleScroll);
-    this.topThreshold = 30;
+    this.topThreshold = 20;
     this.bottomBuffer = 50;
     this.tolerance = 10;
   }
