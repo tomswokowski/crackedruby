@@ -59,18 +59,9 @@
 }
 
 @media (max-width: 767px) {
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background: white;
-    z-index: 39;
-  }
-
   [data-controller='mobile-header'] {
-    z-index: 40;
+    top: -20px;
+    padding-top: calc(1rem + 20px);
+    background: white;
   }
 }
