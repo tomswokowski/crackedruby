@@ -1,4 +1,4 @@
-<div class="mt-auto mb-6 menu-content" data-navigation-drawer-target="menuContent">
+<div class="mt-auto mb-4 menu-content" data-navigation-drawer-target="menuContent">
   <% if user_signed_in? %>
     <details class="group">
       <summary class="flex justify-between items-center w-full cursor-pointer px-2 py-2 rounded bg-gray-100 hover:bg-gray-200">
@@ -25,4 +25,10 @@
       Sign In
     </button>
   <% end %>
+</div>
+
+<div class="mt-2 text-center text-xs text-gray-500 space-x-2 menu-content" data-navigation-drawer-target="menuContent">
+  <%= link_to "Terms", terms_path, class: "hover:text-gray-700" %>
+  <span>•</span>
+  <%= link_to "Privacy", privacy_path, class: "hover:text-gray-700" %>
 </div>
