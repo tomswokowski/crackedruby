@@ -61,10 +61,22 @@
 @supports (-webkit-appearance: none) {
   @media (max-width: 767px) {
     [data-controller='mobile-header'] {
-      top: env(safe-area-inset-top, 0px);
-      padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+      top: calc(env(safe-area-inset-top, 0px) - 5px);
+      padding-top: calc(env(safe-area-inset-top, 0px) + 1.25rem);
       padding-bottom: 1rem;
-      background: linear-gradient(to bottom, white 0%, white calc(100% + 10px));
+      background: linear-gradient(to bottom, white 0%, white calc(100% + 20px));
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-controller='mobile-header']::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 15px;
+      background-color: white;
+      z-index: -1;
     }
   }
 }
