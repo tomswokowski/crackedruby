@@ -2,8 +2,9 @@
   <% if user_signed_in? %>
     <details class="group">
       <summary class="flex justify-between items-center w-full cursor-pointer px-2 py-2 rounded bg-gray-100 hover:bg-gray-200">
-        <span class="text-xs text-gray-800 truncate" style="user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;">
-          <%= current_user.email %>
+        <span class="text-xs text-gray-800 truncate">
+          <span class="hidden md:inline"><%= current_user.email %></span>
+          <span class="md:hidden"><%= current_user.email.split('@').first %></span>
         </span>
         <span class="flex-shrink-0">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 group-open:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
