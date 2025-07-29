@@ -6,7 +6,7 @@ export default class extends Controller {
     this.handleScroll = this.handleScroll.bind(this);
     window.addEventListener('scroll', this.handleScroll);
     this.threshold = 100;
-    this.tolerance = 5;
+    this.tolerance = 10;
   }
 
   disconnect() {
