@@ -57,11 +57,3 @@
     transition: opacity 0.2s ease-in-out;
   }
 }
-
-@media (max-width: 767px) {
-  [data-controller='mobile-header'] {
-    top: -20px;
-    padding-top: calc(1rem + 20px);
-    background: white;
-  }
-}
