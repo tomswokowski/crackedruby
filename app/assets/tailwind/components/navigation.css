@@ -14,22 +14,6 @@
   display: inline;
 }
 
-.page-loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: white;
-  z-index: 9999;
-  transition: opacity 0.3s ease-out;
-}
-
-.page-loading-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
 @media (min-width: 768px) {
   body.sidebar-collapsed main {
     margin-left: 4rem;

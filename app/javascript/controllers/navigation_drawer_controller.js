@@ -4,8 +4,6 @@ export default class extends Controller {
   static targets = ['panel', 'backdrop', 'closeButton', 'menuContent'];
 
   connect() {
-    this.setInitialState();
-
     this.handleResize = this.handleResize.bind(this);
     window.addEventListener('resize', this.handleResize);
   }
@@ -14,60 +12,10 @@ export default class extends Controller {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  setInitialState() {
-    if (window.innerWidth >= 768) {
-      const isCollapsed = sessionStorage.getItem('sidebarCollapsed') === 'true';
-
-      if (isCollapsed) {
-        const mainElement = document.querySelector('main');
-
-        this.panelTarget.style.transition = 'none';
-        document.body.style.transition = 'none';
-        if (mainElement) mainElement.style.transition = 'none';
-
-        this.panelTarget.classList.add('collapsed-sidebar');
-        this.menuContentTargets.forEach((element) => {
-          element.classList.add('hidden');
-        });
-        document.body.classList.add('sidebar-collapsed');
-
-        setTimeout(() => {
-          this.panelTarget.style.transition = '';
-          document.body.style.transition = '';
-          if (mainElement) mainElement.style.transition = '';
-          this.hideLoadingOverlay();
-        }, 100);
-      } else {
-        this.restoreExpandedState();
-        this.hideLoadingOverlay();
-      }
-    } else {
-      this.hideLoadingOverlay();
-    }
-  }
-
-  hideLoadingOverlay() {
-    const overlay = document.getElementById('pageLoadingOverlay');
-    if (overlay) {
-      overlay.classList.add('hidden');
-      setTimeout(() => {
-        overlay.remove();
-      }, 300);
-    }
-  }
-
-  restoreExpandedState() {
-    this.panelTarget.classList.remove('collapsed-sidebar');
-    this.menuContentTargets.forEach((element) => {
-      element.classList.remove('hidden');
-    });
-    document.body.classList.remove('sidebar-collapsed');
-  }
-
   handleResize() {
     if (window.innerWidth >= 768) {
       this.close();
-      this.setInitialState();
+      this.restoreDesktopState();
     } else {
       this.panelTarget.classList.remove('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
@@ -117,7 +65,6 @@ export default class extends Controller {
       element.classList.remove('hidden');
     });
     document.body.classList.remove('sidebar-collapsed');
-    sessionStorage.setItem('sidebarCollapsed', 'false');
   }
 
   collapseSidebar() {
@@ -126,6 +73,13 @@ export default class extends Controller {
       element.classList.add('hidden');
     });
     document.body.classList.add('sidebar-collapsed');
-    sessionStorage.setItem('sidebarCollapsed', 'true');
+  }
+
+  restoreDesktopState() {
+    this.panelTarget.classList.remove('collapsed-sidebar');
+    this.menuContentTargets.forEach((element) => {
+      element.classList.remove('hidden');
+    });
+    document.body.classList.remove('sidebar-collapsed');
   }
 }
