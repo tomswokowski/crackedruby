@@ -57,3 +57,14 @@
     transition: opacity 0.2s ease-in-out;
   }
 }
+
+@supports (-webkit-appearance: none) {
+  @media (max-width: 767px) {
+    [data-controller='mobile-header'] {
+      top: env(safe-area-inset-top, 0px);
+      padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+      padding-bottom: 1rem;
+      background: linear-gradient(to bottom, white 0%, white calc(100% + 10px));
+    }
+  }
+}
