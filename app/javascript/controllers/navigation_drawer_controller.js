@@ -36,11 +36,22 @@ export default class extends Controller {
     } else if (!isDesktop && this.wasDesktop) {
       this.lastDesktopCollapsedState = this.panelTarget.classList.contains('collapsed-sidebar');
 
+      if (this.lastDesktopCollapsedState) {
+        this.panelTarget.style.transition = 'none';
+        this.panelTarget.offsetHeight;
+      }
+
       this.panelTarget.classList.remove('collapsed-sidebar');
       this.menuContentTargets.forEach((element) => {
         element.classList.remove('hidden');
       });
       document.body.classList.remove('sidebar-collapsed');
+
+      if (this.lastDesktopCollapsedState) {
+        requestAnimationFrame(() => {
+          this.panelTarget.style.transition = '';
+        });
+      }
     } else if (!isDesktop) {
       this.close();
     }
