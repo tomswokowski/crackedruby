@@ -1,5 +1,43 @@
 @import 'tailwindcss';
 
-@import './theme.css';
-@import './base.css';
-@import './utilities.css';
+@theme {
+  /* Colors */
+  --color-ruby: #e11d48;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #6b7280;
+  --color-gray-light: #e5e7eb;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@layer base {
+  html {
+    font-family: 'Sora', sans-serif;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: theme(--breakpoint-md)) {
+  body.sidebar-collapsed main {
+    @apply ml-16;
+  }
+
+  .collapsed-sidebar {
+    @apply w-16;
+  }
+}
