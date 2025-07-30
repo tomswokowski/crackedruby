@@ -8,4 +8,8 @@
   body.sidebar-collapsed main {
     @apply ml-16;
   }
+
+  .collapsed-sidebar {
+    @apply w-16;
+  }
 }
