@@ -1,17 +1,20 @@
-<div class="mb-6 flex items-center justify-between logo-container">
+<div class="mb-6 flex items-center justify-between logo-container 
+            group-[.collapsed-sidebar]:md:justify-center group-[.collapsed-sidebar]:md:relative">
   <%= link_to root_path, class: "flex items-center gap-2 cursor-pointer" do %>
-    <img src="/logo.png" alt="CrackedRuby logo" class="h-7 w-auto flex-shrink-0" />
-    <h2 class="text-xl font-bold logo-text" data-nav-drawer-target="menuContent">CrackedRuby</h2>
+    <img src="/logo.png" alt="CrackedRuby Logo" class="h-7 w-auto flex-shrink-0 group-[.collapsed-sidebar]:md:transition-opacity group-[.collapsed-sidebar]:md:duration-200 group-hover:group-[.collapsed-sidebar]:md:opacity-0" />
+    <h2 class="text-xl font-bold logo-text group-[.collapsed-sidebar]:md:hidden" data-nav-drawer-target="menuContent">CrackedRuby</h2>
   <% end %>
 
   <button
     type="button"
-    class="hidden md:flex ml-auto rounded cursor-pointer flex-shrink-0 sidebar-toggle"
+    class="hidden md:flex ml-auto rounded cursor-pointer flex-shrink-0 sidebar-toggle
+           group-[.collapsed-sidebar]:md:opacity-0 group-[.collapsed-sidebar]:md:absolute group-[.collapsed-sidebar]:md:left-1/2 group-[.collapsed-sidebar]:md:top-1/2 group-[.collapsed-sidebar]:md:-translate-x-1/2 group-[.collapsed-sidebar]:md:-translate-y-1/2 group-[.collapsed-sidebar]:md:transition-opacity group-[.collapsed-sidebar]:md:duration-200
+           group-hover:group-[.collapsed-sidebar]:md:opacity-100"
     data-action="click->nav-drawer#toggleDesktop"
     aria-label="Toggle sidebar"
   >
     <svg
-      class="h-5 w-5 text-gray hover:text-ruby transition-colors"
+      class="h-5 w-5 text-gray hover:text-ruby transition-colors group-[.collapsed-sidebar]:md:w-7 group-[.collapsed-sidebar]:md:h-7"
       fill="currentColor"
       viewBox="0 0 64 64"
       xmlns="http://www.w3.org/2000/svg"

@@ -2,4 +2,10 @@
   html {
     font-family: 'Sora', sans-serif;
   }
+
+  @media (min-width: 768px) {
+    body.sidebar-collapsed main {
+      @apply md:ml-16;
+    }
+  }
 }
