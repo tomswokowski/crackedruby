@@ -4,10 +4,12 @@ export default class extends Controller {
   static targets = ['pane', 'fade'];
 
   connect() {
+    // Pre-bind handlers for efficient add/remove
     this.boundUpdate = this.update.bind(this);
+
     this.paneTarget.addEventListener('scroll', this.boundUpdate, { passive: true });
     window.addEventListener('resize', this.boundUpdate);
-    this.update();
+    this.update(); // Check initial state
   }
 
   disconnect() {
@@ -16,11 +18,13 @@ export default class extends Controller {
   }
 
   update() {
+    // Hide fade on mobile - carousel doesn't need fade indicator
     if (window.innerWidth < 768) {
       this.fadeTarget.classList.add('hidden');
       return;
     }
 
+    // Check if scrolled to the end and toggle fade accordingly
     const { scrollLeft, clientWidth, scrollWidth } = this.paneTarget;
     const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
     this.fadeTarget.classList.toggle('hidden', atEnd);
