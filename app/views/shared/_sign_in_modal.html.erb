@@ -9,8 +9,12 @@
       ✕
     </button>
     <h2 class="text-xl font-bold mb-4">Sign in with...</h2>
+    
     <!-- Google -->
-    <%= form_with url: user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full mb-2" do %>
+    <%= form_with url: user_google_oauth2_omniauth_authorize_path, 
+                  method: :post, 
+                  data: { turbo: false }, 
+                  class: "w-full mb-2" do %>
       <button type="submit" 
               class="w-full flex items-center justify-center gap-2 px-4 py-2
                      border border-gray-light rounded bg-white text-black
@@ -24,8 +28,12 @@
         <span>Continue with Google</span>
       </button>
     <% end %>
+    
     <!-- GitHub -->
-    <%= form_with url: user_github_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "w-full" do %>
+    <%= form_with url: user_github_omniauth_authorize_path, 
+                  method: :post, 
+                  data: { turbo: false }, 
+                  class: "w-full" do %>
       <button type="submit" 
               class="w-full flex items-center justify-center gap-2 px-4 py-2
                      border border-gray-light rounded bg-white text-black
