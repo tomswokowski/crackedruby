@@ -6,9 +6,7 @@ application.debug = false;
 window.Stimulus = application;
 
 document.addEventListener('turbo:load', () => {
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 100);
+  window.scrollTo(0, 0);
 });
 
 export { application };
