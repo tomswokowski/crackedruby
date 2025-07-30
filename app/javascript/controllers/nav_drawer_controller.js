@@ -7,6 +7,13 @@ export default class extends Controller {
     this.handleResize = this.handleResize.bind(this);
     window.addEventListener('resize', this.handleResize);
 
+    // Auto-close mobile nav when navigating to prevent flash
+    document.addEventListener('turbo:before-visit', () => {
+      if (window.innerWidth < 768) {
+        this.close();
+      }
+    });
+
     // Remember the last collapsed state and check if we're on desktop
     this.lastDesktopCollapsedState = window.sidebarCollapsed || false;
     this.wasDesktop = window.innerWidth >= 768;
