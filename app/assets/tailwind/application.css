@@ -32,6 +32,10 @@
   }
 }
 
+.menu-section summary:hover .arrow-icon {
+  color: var(--color-ruby);
+}
+
 @media (min-width: theme(--breakpoint-md)) {
   body.sidebar-collapsed main {
     @apply ml-16;
