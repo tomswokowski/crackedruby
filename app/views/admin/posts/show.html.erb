@@ -1,15 +1,53 @@
-<h1 class="text-2xl font-bold mb-4"><%= @post.title %></h1>
-<p class="text-sm text-gray-500 mb-2">Slug: <%= @post.slug %></p>
-<p class="text-sm text-gray-500 mb-6">
-  Published: <%= @post.published? %> |
-  Featured:  <%= @post.featured? %>
-</p>
+<div class="mb-6">
+  <h1 class="text-2xl font-bold mb-4"><%= @post.title %></h1>
+  
+  <div class="flex items-center gap-3 mb-4">
+    <span class="px-3 py-1 text-sm rounded-full 
+                 <%= case @post.post_type
+                     when 'learn_ruby' then 'bg-blue-100 text-blue-800'
+                     when 'software_dev' then 'bg-green-100 text-green-800'
+                     when 'blog' then 'bg-purple-100 text-purple-800'
+                     end %>">
+      <%= @post.post_type.humanize %>
+    </span>
+    <% if @post.featured %>
+      <span class="px-3 py-1 text-sm bg-ruby/10 text-ruby rounded-full">Featured</span>
+    <% end %>
+    <% unless @post.published %>
+      <span class="px-3 py-1 text-sm bg-gray-light text-gray rounded-full">Draft</span>
+    <% end %>
+  </div>
 
-<div class="prose lg:prose-xl">
+  <div class="text-sm text-gray mb-6 space-y-1">
+    <p><strong>Slug:</strong> <code class="bg-gray-light px-2 py-1 rounded text-xs"><%= @post.slug %></code></p>
+    <p><strong>URL:</strong> 
+      <code class="bg-gray-light px-2 py-1 rounded text-xs">
+        /<%=
+          case @post.post_type
+          when 'learn_ruby' then 'learn-ruby'
+          when 'software_dev' then 'software-development'
+          when 'blog' then 'blog'
+          end
+        %>/<%= @post.slug %>
+      </code>
+    </p>
+    <p><strong>Created:</strong> <%= @post.created_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <% if @post.updated_at != @post.created_at %>
+      <p><strong>Updated:</strong> <%= @post.updated_at.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="prose lg:prose-xl max-w-none mb-8">
   <%== marksmithed(@post.body) %>
 </div>
 
-<div class="mt-6 space-x-2">
-  <%= link_to "Edit", edit_admin_post_path(@post), class: "px-4 py-2 bg-yellow-300 rounded" %>
-  <%= link_to "Back",  admin_posts_path,            class: "px-4 py-2 bg-gray-200 rounded" %>
+<div class="flex items-center gap-3 pt-6 border-t border-gray-light">
+  <%= link_to "Edit Post", edit_admin_post_path(@post), 
+              class: "px-4 py-2 bg-ruby text-white rounded hover:bg-ruby/90" %>
+  <%= link_to "← Back to Posts", admin_posts_path, 
+              class: "px-4 py-2 bg-gray-light text-black rounded hover:bg-gray" %>
+  <%= link_to "View Live", post_path_for_type(@post), 
+              class: "px-4 py-2 border border-ruby text-ruby rounded hover:bg-ruby hover:text-white", 
+              target: "_blank" %>
 </div>

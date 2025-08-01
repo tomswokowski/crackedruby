@@ -2,10 +2,10 @@
 
 <div class="space-y-8 mb-16">
   <% [
-    ["Latest Content",       @latest_entries,    nil],
-    ["Learn Ruby",           @latest_lessons,    lessons_path],
-    ["Software Dev",         @latest_articles,   articles_path],
-    ["Blog",                 @latest_posts,      posts_path]
+    ["Latest Content",       @latest_entries,      nil],
+    ["Learn Ruby",           @latest_learn_ruby,   "/learn-ruby"],
+    ["Software Dev",         @latest_software_dev, "/software-development"],
+    ["Blog",                 @latest_blog,         "/blog"]
   ].each do |heading, collection, path| %>
     <%= render "shared/carousel", heading: heading, collection: collection, path: path %>
   <% end %>

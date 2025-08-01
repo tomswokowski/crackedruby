@@ -50,7 +50,7 @@ module Admin
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :slug, :published, :featured)
+      params.require(:post).permit(:title, :body, :slug, :published, :featured, :post_type)
     end
   end
 end

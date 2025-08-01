@@ -18,7 +18,7 @@
     <% items.each do |item| %>
       <li>
         <%= link_to item.title, 
-                    send("#{item.class.name.downcase}_path", item.slug), 
+                    post_path_for_type(item), 
                     class: "block text-gray hover:text-ruby text-sm truncate cursor-pointer" %>
       </li>
     <% end %>

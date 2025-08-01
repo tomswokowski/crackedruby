@@ -1,4 +1,4 @@
-<%= link_to send("#{item.class.name.downcase}_path", item.slug),
+<%= link_to post_path_for_type(item), 
             class: "group snap-start block flex-shrink-0 last:mr-8
                     w-72 sm:w-80 md:w-96" do %>
   <div class="h-full bg-white border border-gray-light rounded-xl p-6
@@ -15,7 +15,8 @@
       <%= strip_tags(marksmithed(item.body)) %>
     </p>
     <div class="mt-auto">
-      <span class="inline-flex items-center gap-1 font-medium text-ruby transition">
+      <span class="inline-flex items-center gap-1 font-medium text-ruby transition
+                   group-hover:text-black">
         Read more
         <svg xmlns="http://www.w3.org/2000/svg"
              class="w-4 h-4 transition-transform group-hover:translate-x-1"

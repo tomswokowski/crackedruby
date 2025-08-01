@@ -1,19 +1,27 @@
 <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
   <div class="p-6 bg-white shadow rounded-lg">
-    <h2 class="text-xl font-semibold">Posts</h2>
+    <h2 class="text-xl font-semibold">Total Posts</h2>
     <p class="mt-2 text-4xl"><%= @post_count %></p>
-    <%= link_to "Manage Posts", admin_posts_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+    <%= link_to "Manage All Posts", admin_posts_path, class: "mt-4 inline-block text-ruby hover:underline" %>
   </div>
+  
   <div class="p-6 bg-white shadow rounded-lg">
-    <h2 class="text-xl font-semibold">Articles</h2>
-    <p class="mt-2 text-4xl"><%= @article_count %></p>
-    <%= link_to "Manage Articles", admin_articles_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+    <h2 class="text-xl font-semibold">Learn Ruby</h2>
+    <p class="mt-2 text-4xl"><%= @learn_ruby_count %></p>
+    <%= link_to "View Learn Ruby", "/learn-ruby", class: "mt-4 inline-block text-ruby hover:underline" %>
   </div>
+  
   <div class="p-6 bg-white shadow rounded-lg">
-    <h2 class="text-xl font-semibold">Lessons</h2>
-    <p class="mt-2 text-4xl"><%= @lesson_count %></p>
-    <%= link_to "Manage Lessons", admin_lessons_path, class: "mt-4 inline-block text-blue-600 hover:underline" %>
+    <h2 class="text-xl font-semibold">Software Dev</h2>
+    <p class="mt-2 text-4xl"><%= @software_dev_count %></p>
+    <%= link_to "View Software Dev", "/software-development", class: "mt-4 inline-block text-ruby hover:underline" %>
+  </div>
+  
+  <div class="p-6 bg-white shadow rounded-lg">
+    <h2 class="text-xl font-semibold">Blog Posts</h2>
+    <p class="mt-2 text-4xl"><%= @blog_count %></p>
+    <%= link_to "View Blog", "/blog", class: "mt-4 inline-block text-ruby hover:underline" %>
   </div>
 </div>

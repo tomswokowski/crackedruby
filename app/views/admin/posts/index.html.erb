@@ -1,20 +1,50 @@
 <h1 class="text-3xl font-bold mb-6">Manage Posts</h1>
-<%= link_to "New Post", new_admin_post_path, class: "px-4 py-2 bg-green-500 text-white rounded" %>
+<%= link_to "New Post", new_admin_post_path, class: "px-4 py-2 bg-ruby text-white rounded hover:bg-ruby/90" %>
 
-<ul class="mt-4 space-y-2">
+<div class="mt-6 space-y-3">
   <% @posts.each do |post| %>
-    <li class="p-4 border rounded flex justify-between items-center">
-      <div>
-        <%= post.title %>
+    <div class="p-4 bg-white border border-gray-light rounded-lg flex justify-between items-center shadow-sm">
+      <div class="flex-1">
+        <div class="flex items-center gap-3 mb-2">
+          <h3 class="font-semibold text-black"><%= post.title %></h3>
+          <span class="px-2 py-1 text-xs rounded-full 
+                       <%= case post.post_type
+                           when 'learn_ruby' then 'bg-blue-100 text-blue-800'
+                           when 'software_dev' then 'bg-green-100 text-green-800'
+                           when 'blog' then 'bg-purple-100 text-purple-800'
+                           end %>">
+            <%= post.post_type.humanize %>
+          </span>
+          <% if post.featured %>
+            <span class="px-2 py-1 text-xs bg-ruby/10 text-ruby rounded-full">Featured</span>
+          <% end %>
+          <% unless post.published %>
+            <span class="px-2 py-1 text-xs bg-gray-light text-gray rounded-full">Draft</span>
+          <% end %>
+        </div>
+        <p class="text-sm text-gray">
+          Created <%= post.created_at.strftime("%B %d, %Y") %>
+          <% if post.slug %>
+            • <code class="text-xs bg-gray-light px-1 rounded">/<%=
+              case post.post_type
+              when 'learn_ruby' then 'learn-ruby'
+              when 'software_dev' then 'software-development'
+              when 'blog' then 'blog'
+              end
+            %>/<%= post.slug %></code>
+          <% end %>
+        </p>
       </div>
-      <div class="space-x-2">
-        <%= link_to "Show",  admin_post_path(post),       class: "px-2 py-1 bg-blue-300 rounded" %>
-        <%= link_to "Edit",  edit_admin_post_path(post), class: "px-2 py-1 bg-yellow-300 rounded" %>
+      <div class="flex items-center space-x-2">
+        <%= link_to "Show", admin_post_path(post), 
+                    class: "px-3 py-1 bg-gray-light text-black rounded hover:bg-gray" %>
+        <%= link_to "Edit", edit_admin_post_path(post), 
+                    class: "px-3 py-1 bg-ruby text-white rounded hover:bg-ruby/90" %>
         <%= link_to "Delete", admin_post_path(post),
                     method: :delete,
                     data: { confirm: "Are you sure?" },
-                    class: "px-2 py-1 bg-red-400 text-white rounded" %>
+                    class: "px-3 py-1 bg-black text-white rounded hover:bg-gray" %>
       </div>
-    </li>
+    </div>
   <% end %>
-</ul>
+</div>

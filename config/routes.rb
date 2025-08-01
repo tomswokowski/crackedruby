@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   get "privacy", to: "pages#privacy", as: :privacy
 
   # Public Resourceful Paths
-  resources :lessons,  only: %i[index show], path: "learn-ruby",           param: :slug
-  resources :articles, only: %i[index show], path: "software-development", param: :slug
-  resources :posts,    only: %i[index show], path: "blog",                 param: :slug
+  get "learn-ruby",                 to: "posts#index", post_type: "learn_ruby"
+  get "learn-ruby/:slug",           to: "posts#show",  post_type: "learn_ruby"
+
+  get "software-development",       to: "posts#index", post_type: "software_dev"
+  get "software-development/:slug", to: "posts#show",  post_type: "software_dev"
+
+  get "blog",                       to: "posts#index", post_type: "blog"
+  get "blog/:slug",                 to: "posts#show",  post_type: "blog"
 
   # Authenticated Routes
   authenticate :user do
@@ -21,9 +26,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     namespace :admin do
       root to: "home#index"
-      resources :posts,    param: :slug
-      resources :articles, param: :slug
-      resources :lessons,  param: :slug
+      resources :posts, param: :slug
     end
   end
 

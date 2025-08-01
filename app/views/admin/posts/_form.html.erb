@@ -11,35 +11,52 @@
   <% end %>
 
   <div class="mb-4">
-    <%= f.label :title, class: "block font-medium" %>
-    <%= f.text_field :title, class: "w-full border rounded p-2" %>
+    <%= f.label :title, class: "block font-medium mb-1" %>
+    <%= f.text_field :title, class: "w-full border border-gray-light rounded p-3 focus:border-ruby focus:outline-none" %>
   </div>
 
   <div class="mb-4">
-    <%= f.label :slug, class: "block font-medium" %>
-    <%= f.text_field :slug, class: "w-full border rounded p-2" %>
+    <%= f.label :post_type, "Content Type", class: "block font-medium mb-1" %>
+    <%= f.select :post_type, 
+                 options_for_select([
+                   ['Learn Ruby', 'learn_ruby'],
+                   ['Software Dev', 'software_dev'],
+                   ['Blog', 'blog']
+                 ], @post.post_type),
+                 { prompt: 'Select content type...' },
+                 { class: "w-full border border-gray-light rounded p-3 focus:border-ruby focus:outline-none" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :slug, class: "block font-medium mb-1" %>
+    <%= f.text_field :slug, 
+                     class: "w-full border border-gray-light rounded p-3 focus:border-ruby focus:outline-none",
+                     placeholder: "Leave blank to auto-generate from title" %>
   </div>
 
   <div class="mb-4">
     <%= f.label :body, class: "block font-medium mb-1" %>
     <%= f.marksmith :body,
-          rows: 10,
-          class: "w-full border rounded p-2",
-          placeholder: "Write your content in Markdown…" %>
+                    rows: 12,
+                    class: "w-full border border-gray-light rounded p-3 focus:border-ruby focus:outline-none",
+                    placeholder: "Write your content in Markdown…" %>
   </div>
 
-  <div class="flex items-center mb-4 space-x-6">
-    <label class="inline-flex items-center">
-      <%= f.check_box :published %>
-      <span class="ml-2">Published</span>
+  <div class="flex items-center mb-6 space-x-6">
+    <label class="inline-flex items-center cursor-pointer">
+      <%= f.check_box :published, class: "text-ruby focus:ring-ruby" %>
+      <span class="ml-2 font-medium">Published</span>
     </label>
-    <label class="inline-flex items-center">
-      <%= f.check_box :featured %>
-      <span class="ml-2">Featured</span>
+    <label class="inline-flex items-center cursor-pointer">
+      <%= f.check_box :featured, class: "text-ruby focus:ring-ruby" %>
+      <span class="ml-2 font-medium">Featured</span>
     </label>
   </div>
 
-  <div>
-    <%= f.submit class: "px-4 py-2 bg-blue-600 text-white rounded" %>
+  <div class="flex items-center gap-3">
+    <%= f.submit class: "px-6 py-3 bg-ruby text-white rounded hover:bg-ruby/90 font-medium" %>
+    <%= link_to "Cancel", 
+                @post.persisted? ? admin_post_path(@post) : admin_posts_path,
+                class: "px-6 py-3 bg-gray-light text-black rounded hover:bg-gray font-medium" %>
   </div>
 <% end %>

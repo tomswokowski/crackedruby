@@ -1,19 +1,19 @@
 <div class="flex flex-col space-y-4 mb-6 menu-content" data-nav-drawer-target="menuContent">
   <%= render "shared/nav/menu_section", 
       title: "Learn Ruby", 
-      items: Lesson.where(featured: true).limit(3), 
-      view_all_path: lessons_path %>
+      items: Post.learn_ruby.where(featured: true).limit(3), 
+      view_all_path: "/learn-ruby" %>
   
   <%= render "shared/nav/menu_section", 
       title: "Software Dev", 
-      items: Article.where(featured: true).limit(3), 
-      view_all_path: articles_path,
+      items: Post.software_dev.where(featured: true).limit(3), 
+      view_all_path: "/software-development",
       open: false %>
   
   <%= render "shared/nav/menu_section", 
       title: "Blog", 
-      items: Post.where(featured: true).limit(3), 
-      view_all_path: posts_path,
+      items: Post.blogs.where(featured: true).limit(3), 
+      view_all_path: "/blog",
       open: false %>
   
   <div class="border-t border-gray-light pt-4 mt-2 space-y-4">
