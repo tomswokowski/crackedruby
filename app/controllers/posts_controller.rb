@@ -1,6 +1,28 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.where(post_type: params[:post_type]).published
+
+    # Apply search filter
+    if params[:search].present?
+      @posts = @posts.where(
+        "title ILIKE ? OR description ILIKE ?",
+        "%#{params[:search]}%",
+        "%#{params[:search]}%"
+      )
+    end
+
+    # Apply sorting
+    @posts = case params[:sort]
+    when "oldest"
+      @posts.order(created_at: :asc)
+    when "title_asc"
+      @posts.order(title: :asc)
+    when "title_desc"
+      @posts.order(title: :desc)
+    else # 'newest' or default
+      @posts.order(created_at: :desc)
+    end
+
     @post_type = params[:post_type]
     @page_title = page_title_for_type(@post_type)
   end
