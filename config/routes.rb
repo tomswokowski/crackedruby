@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   # Static Pages
   get "about",   to: "pages#about",   as: :about
-  get "apps",    to: "pages#apps",    as: :apps
   get "terms",   to: "pages#terms",   as: :terms
   get "privacy", to: "pages#privacy", as: :privacy
 
