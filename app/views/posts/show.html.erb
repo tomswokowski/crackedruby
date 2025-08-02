@@ -10,7 +10,7 @@
 </div>
 
 <!-- Article Header -->
-<header class="mb-8 pb-6 border-b border-gray-light">
+<div class="mb-8 pb-6 border-b border-gray-light">
   <h1 class="text-4xl font-bold text-black mb-4 leading-tight">
     <%= @post.title %>
   </h1>
@@ -43,7 +43,7 @@
       <%= pluralize((@post.body.split.length / 200.0).ceil, 'min') %> read
     </span>
   </div>
-</header>
+</div>
 
 <!-- Article Content -->
 <article class="markdown-content max-w-none">
@@ -51,13 +51,8 @@
 </article>
 
 <!-- Article Footer -->
-<footer class="mt-12 pt-8 border-t border-gray-light">
+<div class="mt-12 pt-8 border-t border-gray-light">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <!-- Share buttons or tags could go here -->
-    <div class="text-sm text-gray">
-      Last updated <%= @post.updated_at.strftime("%B %d, %Y") %>
-    </div>
-    
     <!-- Navigation to next/previous posts -->
     <div class="flex gap-4">
       <%= link_to @back_link_path, 
@@ -68,5 +63,9 @@
         Back to <%= @page_title || 'Posts' %>
       <% end %>
     </div>
+    <!-- Share buttons or tags could go here -->
+    <div class="text-sm text-gray">
+      Last updated <%= @post.updated_at.strftime("%B %d, %Y") %>
+    </div>
   </div>
-</footer>
+</div>

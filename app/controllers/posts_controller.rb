@@ -45,9 +45,9 @@ class PostsController < ApplicationController
 
   def back_link_text_for_type(type)
     case type
-    when "learn_ruby" then "\u2190 Back to Learn Ruby"
-    when "software_dev" then "\u2190 Back to Software Dev"
-    when "blog" then "\u2190 Back to Blog"
+    when "learn_ruby" then "Back to Learn Ruby"
+    when "software_dev" then "Back to Software Dev"
+    when "blog" then "Back to Blog"
     end
   end
 
