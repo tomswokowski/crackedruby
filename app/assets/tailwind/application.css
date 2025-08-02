@@ -32,6 +32,8 @@
   }
 }
 
+@import './markdown';
+
 .menu-section summary:hover .arrow-icon {
   color: var(--color-ruby);
 }

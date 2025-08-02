@@ -1,9 +1,72 @@
-<h1 class="text-3xl font-bold mb-6"><%= @post.title %></h1>
-
-<div class="prose lg:prose-xl mx-auto">
-  <%== marksmithed(@post.body) %>
+<!-- Back Navigation -->
+<div class="mb-6">
+  <%= link_to @back_link_path, 
+        class: "inline-flex items-center gap-2 text-ruby hover:text-black transition-colors font-medium" do %>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+    <%= @back_link_text %>
+  <% end %>
 </div>
 
-<%= link_to @back_link_text,
-            @back_link_path,
-            class: "mt-6 inline-block text-ruby hover:underline" %>
+<!-- Article Header -->
+<header class="mb-8 pb-6 border-b border-gray-light">
+  <h1 class="text-4xl font-bold text-black mb-4 leading-tight">
+    <%= @post.title %>
+  </h1>
+  
+  <% if @post.description.present? %>
+    <p class="text-lg text-gray mb-4 leading-relaxed">
+      <%= @post.description %>
+    </p>
+  <% end %>
+  
+  <div class="flex items-center gap-4 text-sm text-gray">
+    <% if @post.post_type == 'blog' %>
+      <time datetime="<%= @post.created_at.iso8601 %>">
+        Published <%= @post.created_at.strftime("%B %d, %Y") %>
+      </time>
+    <% else %>
+      <span class="inline-flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        Tutorial
+      </span>
+    <% end %>
+    
+    <!-- Reading time estimate -->
+    <span class="flex items-center gap-1">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <%= pluralize((@post.body.split.length / 200.0).ceil, 'min') %> read
+    </span>
+  </div>
+</header>
+
+<!-- Article Content -->
+<article class="markdown-content max-w-none">
+  <%== marksmithed @post.body %>
+</article>
+
+<!-- Article Footer -->
+<footer class="mt-12 pt-8 border-t border-gray-light">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <!-- Share buttons or tags could go here -->
+    <div class="text-sm text-gray">
+      Last updated <%= @post.updated_at.strftime("%B %d, %Y") %>
+    </div>
+    
+    <!-- Navigation to next/previous posts -->
+    <div class="flex gap-4">
+      <%= link_to @back_link_path, 
+            class: "inline-flex items-center gap-2 px-4 py-2 bg-gray-light hover:bg-gray-light/80 rounded-lg transition-colors text-sm font-medium" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to <%= @page_title || 'Posts' %>
+      <% end %>
+    </div>
+  </div>
+</footer>
