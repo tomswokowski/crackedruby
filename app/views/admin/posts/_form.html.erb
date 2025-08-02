@@ -16,6 +16,15 @@
   </div>
 
   <div class="mb-4">
+    <%= f.label :description, class: "block font-medium mb-1" %>
+    <%= f.text_area :description,
+                    rows: 3,
+                    class: "w-full border border-gray-light rounded p-3 focus:border-ruby focus:outline-none",
+                    placeholder: "Brief description for cards and previews (max 500 characters)" %>
+    <p class="text-sm text-gray mt-1">This will appear on content cards and previews</p>
+  </div>
+
+  <div class="mb-4">
     <%= f.label :post_type, "Content Type", class: "block font-medium mb-1" %>
     <%= f.select :post_type, 
                  options_for_select([

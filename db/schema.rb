@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_01_124205) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_02_150858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_01_124205) do
     t.datetime "updated_at", null: false
     t.boolean "featured", default: false, null: false
     t.string "post_type", null: false
+    t.text "description"
     t.index ["post_type"], name: "index_posts_on_post_type"
     t.index ["published"], name: "index_posts_on_published"
     t.index ["slug"], name: "index_posts_on_slug", unique: true

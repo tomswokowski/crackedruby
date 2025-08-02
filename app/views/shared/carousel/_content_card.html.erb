@@ -1,6 +1,6 @@
-<%= link_to post_path_for_type(item), 
-            class: "group snap-start block flex-shrink-0 last:mr-8
-                    w-72 sm:w-80 md:w-96" do %>
+<%= link_to post_path_for_type(item),
+             class: "group snap-start block flex-shrink-0 last:mr-8
+                     w-72 sm:w-80 md:w-96" do %>
   <div class="h-full bg-white border border-gray-light rounded-xl p-6
               flex flex-col shadow-sm transition duration-200 ease-in-out
               hover:shadow-md hover:border-ruby hover:ring-1 hover:ring-ruby/20">
@@ -10,12 +10,13 @@
         <%= item.created_at.strftime("%m/%d/%Y") %>
       </p>
     <% end %>
-
-    <h3 class="text-xl font-semibold text-black mb-3 line-clamp-2">
-      <%= item.title %>
-    </h3>
+    <div class="h-14 mb-3 flex items-start">
+      <h3 class="text-xl font-semibold text-black line-clamp-2">
+        <%= item.title %>
+      </h3>
+    </div>
     <p class="text-base text-gray mb-6 line-clamp-4">
-      <%= strip_tags(marksmithed(item.body)) %>
+      <%= item.description %>
     </p>
     <div class="mt-auto">
       <span class="inline-flex items-center gap-1 font-medium text-ruby transition

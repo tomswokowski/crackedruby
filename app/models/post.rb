@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :post_type, presence: true, inclusion: { in: TYPES }
   validates :slug, presence: true, uniqueness: true
+  validates :description, presence: true, length: { maximum: 500 }
 
   scope :published, -> { where(published: true) }
   scope :featured, -> { where(featured: true) }
