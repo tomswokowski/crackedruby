@@ -4,10 +4,42 @@
       <%= heading %>
     </h2>
 
-    <div data-controller="carousel" class="relative">
+    <div data-controller="carousel" class="relative group">
+      <button
+        data-carousel-target="leftBtn"
+        data-action="click->carousel#scrollLeft"
+        class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 
+               w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center
+               text-gray hover:text-ruby hover:shadow-xl transition-all cursor-pointer
+               opacity-0 group-hover:opacity-100 -translate-x-5 group-hover:translate-x-0"
+        aria-label="Scroll left"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        data-carousel-target="rightBtn"
+        data-action="click->carousel#scrollRight"
+        class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 
+               w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center
+               text-gray hover:text-ruby hover:shadow-xl transition-all cursor-pointer
+               opacity-0 group-hover:opacity-100 translate-x-5 group-hover:translate-x-0"
+        aria-label="Scroll right"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
       <div
         data-carousel-target="pane"
-        class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar"
+        class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory no-scrollbar
+               focus:outline-none focus:ring-2 focus:ring-ruby focus:ring-offset-2 rounded"
+        tabindex="0"
+        role="region"
+        aria-label="<%= heading %> carousel"
       >
         <%= render partial: "shared/carousel/content_card",
             collection: collection, as: :item %>
