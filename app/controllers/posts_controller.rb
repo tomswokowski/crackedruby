@@ -11,6 +11,11 @@ class PostsController < ApplicationController
       )
     end
 
+    # Apply category filter
+    if params[:category].present?
+      @posts = @posts.where(category: params[:category])
+    end
+
     # Apply sorting
     @posts = case params[:sort]
     when "oldest"
@@ -19,8 +24,14 @@ class PostsController < ApplicationController
       @posts.order(title: :asc)
     when "title_desc"
       @posts.order(title: :desc)
-    else # 'newest' or default
-      @posts.order(created_at: :desc)
+    when "section_order"
+      @posts.order(:section_number, :created_at)
+    else
+      if params[:post_type] == "learn_ruby"
+        @posts.order(:section_number, :created_at)
+      else
+        @posts.order(created_at: :desc)
+      end
     end
 
     @post_type = params[:post_type]
@@ -53,9 +64,9 @@ class PostsController < ApplicationController
 
   def back_link_path_for_type(type)
     case type
-    when "learn_ruby" then "/learn-ruby"
-    when "software_dev" then "/software-development"
-    when "blog" then "/blog"
+    when "learn_ruby" then learn_ruby_posts_path
+    when "software_dev" then software_dev_posts_path
+    when "blog" then blog_posts_path
     end
   end
 end

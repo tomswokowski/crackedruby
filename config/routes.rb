@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   get "privacy", to: "pages#privacy", as: :privacy
 
   # Public Resourceful Paths
-  get "learn-ruby",                 to: "posts#index", post_type: "learn_ruby"
-  get "learn-ruby/:slug",           to: "posts#show",  post_type: "learn_ruby"
+  get "learn-ruby",                 to: "posts#index", post_type: "learn_ruby", as: :learn_ruby_posts
+  get "learn-ruby/:slug",           to: "posts#show", post_type: "learn_ruby", as: :learn_ruby_post
 
-  get "software-development",       to: "posts#index", post_type: "software_dev"
-  get "software-development/:slug", to: "posts#show",  post_type: "software_dev"
+  get "software-development",       to: "posts#index", post_type: "software_dev", as: :software_dev_posts
+  get "software-development/:slug", to: "posts#show", post_type: "software_dev", as: :software_dev_post
 
-  get "blog",                       to: "posts#index", post_type: "blog"
-  get "blog/:slug",                 to: "posts#show",  post_type: "blog"
+  get "blog",                       to: "posts#index", post_type: "blog", as: :blog_posts
+  get "blog/:slug",                 to: "posts#show", post_type: "blog", as: :blog_post
 
   # Authenticated Routes
   authenticate :user do

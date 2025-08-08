@@ -1,102 +1,141 @@
-<!-- Header Section -->
-<div class="mb-8">
-  <h1 class="text-3xl font-bold text-black mb-2"><%= @page_title %></h1>
-  <p class="text-gray mb-6"><%= pluralize(@posts.count, 'post') %> available</p>
-    
-    <!-- Filters & Search Bar -->
-    <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-white border border-gray-light rounded-xl p-4">
-      <div class="flex gap-3 items-center">
-        <label class="text-sm font-medium text-black">Sort by:</label>
-        <%= form_with url: request.path, method: :get, local: true, class: "flex gap-2" do |form| %>
-          <%= form.select :sort, 
-                options_for_select([
-                  ['Newest First', 'newest'],
-                  ['Oldest First', 'oldest'],
-                  ['Title A-Z', 'title_asc'],
-                  ['Title Z-A', 'title_desc']
-                ], params[:sort] || 'newest'),
-                {},
-                { 
-                  class: "px-3 py-2 border border-gray-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ruby/20 focus:border-ruby",
-                  onchange: "this.form.submit();"
-                } %>
-        <% end %>
-      </div>
-      
-      <!-- Search Bar -->
-      <%= form_with url: request.path, method: :get, local: true, class: "flex-1 max-w-md" do |form| %>
-        <div class="relative">
-          <%= form.text_field :search, 
-                placeholder: "Search posts...", 
-                value: params[:search],
-                class: "w-full px-4 py-2 pl-10 border border-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-ruby/20 focus:border-ruby" %>
-          <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-          <%= form.hidden_field :sort, value: params[:sort] %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Posts List -->
-  <div class="space-y-4">
-    <% @posts.each do |post| %>
-      <%= link_to "#{request.path}/#{post.slug}", 
-            class: "group block bg-white border border-gray-light rounded-xl p-6 transition-all duration-200 hover:shadow-md hover:border-ruby hover:ring-1 hover:ring-ruby/20" do %>
-        
-        <div class="flex flex-col">
-          <!-- Title -->
-          <h2 class="text-xl font-semibold text-black mb-2 group-hover:text-ruby transition-colors">
-            <%= post.title %>
-          </h2>
-          
-          <!-- Description -->
-          <% if post.description.present? %>
-            <p class="text-gray mb-3 line-clamp-2">
-              <%= post.description %>
-            </p>
-          <% end %>
-          
-          <!-- Meta Information -->
-          <div class="flex items-center justify-between text-sm text-gray">
-            <% if post.post_type == 'blog' %>
-              <span><%= post.created_at.strftime("%B %d, %Y") %></span>
-            <% else %>
-              <span>Tutorial</span>
-            <% end %>
-            
-            <span class="inline-flex items-center gap-1 font-medium text-ruby group-hover:text-black transition-colors">
-              Read more
-              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-      <% end %>
+<!-- Header -->
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-black mb-1"><%= @page_title %></h1>
+  <p class="text-sm text-gray mb-4"><%= @posts.count %> topics</p>
+  
+  <!-- Compact Search -->
+  <div class="max-w-sm">
+    <%= form_with url: request.path, method: :get, local: true do |form| %>
+      <%= form.text_field :search, 
+            placeholder: "Search...", 
+            value: params[:search],
+            class: "w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-ruby" %>
+      <%= form.hidden_field :category, value: params[:category] %>
     <% end %>
   </div>
-
-  <!-- Empty State -->
-  <% if @posts.empty? %>
-    <div class="text-center py-12">
-      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-light flex items-center justify-center">
-        <svg class="w-8 h-8 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-        </svg>
-      </div>
-      <h3 class="text-lg font-medium text-black mb-2">No posts found</h3>
-      <p class="text-gray">
-        <% if params[:search].present? %>
-          No posts match your search for "<%= params[:search] %>".
-        <% else %>
-          There are no posts in this category yet.
-        <% end %>
-      </p>
-      <% if params[:search].present? %>
-        <%= link_to "Clear search", request.path, class: "inline-block mt-4 px-4 py-2 bg-ruby text-white rounded-lg hover:bg-ruby/90 transition-colors" %>
-      <% end %>
-    </div>
-  <% end %>
 </div>
+
+<% if @post_type == "blog" %>
+  <!-- Single Column Blog Layout -->
+  <div class="max-w-2xl text-sm leading-tight">
+    <% @posts.each do |post| %>
+      <div class="flex items-start gap-3 py-2 border-b border-gray-100 last:border-b-0">
+        <span class="text-xs text-gray mt-1 min-w-[4rem]">
+          <%= post.created_at.strftime("%b %d, %y") %>
+        </span>
+        <div class="flex-1">
+          <%= link_to blog_post_path(post.slug), class: "text-black hover:text-ruby transition-colors leading-snug" do %>
+            <%= post.title %><% if post.ai_generated? %> <span class="text-xs text-gray-500">[AI]</span><% end %>
+          <% end %>
+          <% if post.description.present? %>
+            <div class="text-gray text-xs mt-0.5 leading-relaxed">
+              <%= post.description %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <!-- 2-Column Layout for Learn Ruby & Software Dev -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-tight">
+    <% @posts.group_by(&:category).each do |category, category_posts| %>
+      <!-- Category -->
+      <div class="mb-6">
+        <h2 class="font-bold text-black mb-3 text-base border-b border-gray-200 pb-1">
+          <%= category.present? ? category : "General" %>
+          <span class="font-normal text-gray text-sm">(<%= category_posts.count %>)</span>
+        </h2>
+        
+        <% if category_posts.any?(&:subcategory) %>
+          <!-- With subcategories - Ruby style -->
+          <% category_posts.group_by(&:subcategory).each do |subcategory, posts| %>
+            <% if subcategory.present? %>
+              <div class="mb-4">
+                <h3 class="font-semibold text-black text-sm mb-2 text-gray-800"><%= subcategory %></h3>
+                <div class="space-y-1">
+                  <% posts.each do |post| %>
+                    <% 
+                      post_path = case @post_type
+                      when "learn_ruby" then learn_ruby_post_path(post.slug)
+                      when "software_dev" then software_dev_post_path(post.slug)
+                      when "blog" then blog_post_path(post.slug)
+                      end
+                    %>
+                    <div class="flex items-start gap-2">
+                      <% if post.section_number.present? %>
+                        <span class="text-xs text-gray font-mono min-w-[2.5rem] mt-0.5"><%= post.section_number %></span>
+                      <% else %>
+                        <span class="text-gray mt-1">•</span>
+                      <% end %>
+                      <%= link_to post_path, class: "text-black hover:text-ruby transition-colors flex-1 leading-snug" do %>
+                        <%= post.title %><% if post.ai_generated? %> <span class="text-xs text-gray-500">[AI]</span><% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <!-- No subcategory -->
+              <div class="space-y-1">
+                <% posts.each do |post| %>
+                  <% 
+                    post_path = case @post_type
+                    when "learn_ruby" then learn_ruby_post_path(post.slug)
+                    when "software_dev" then software_dev_post_path(post.slug)
+                    when "blog" then blog_post_path(post.slug)
+                    end
+                  %>
+                  <div class="flex items-start gap-2">
+                    <span class="text-gray mt-1">•</span>
+                    <%= link_to post_path, class: "text-black hover:text-ruby transition-colors flex-1 leading-snug" do %>
+                      <%= post.title %><% if post.ai_generated? %> <span class="text-xs text-gray-500">[AI]</span><% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <!-- Flat list - Software Dev style -->
+          <div class="space-y-1">
+            <% category_posts.each do |post| %>
+              <% 
+                post_path = case @post_type
+                when "learn_ruby" then learn_ruby_post_path(post.slug)
+                when "software_dev" then software_dev_post_path(post.slug)
+                when "blog" then blog_post_path(post.slug)
+                end
+              %>
+              <div class="flex items-start gap-2">
+                <span class="text-gray mt-1">•</span>
+                <div class="flex-1">
+                  <%= link_to post_path, class: "text-black hover:text-ruby transition-colors leading-snug" do %>
+                    <%= post.title %><% if post.ai_generated? %> <span class="text-xs text-gray-500">[AI]</span><% end %>
+                  <% end %>
+                  <% if post.description.present? %>
+                    <div class="text-gray text-xs mt-0.5 leading-relaxed">
+                      <%= truncate(post.description, length: 80) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Minimal Empty State -->
+<% if @posts.empty? %>
+  <div class="text-sm text-gray">
+    <% if params[:search].present? %>
+      No results for "<%= params[:search] %>". 
+      <%= link_to "Clear", request.path.split('?').first, class: "text-ruby hover:underline" %>
+    <% else %>
+      No topics available.
+    <% end %>
+  </div>
+<% end %>
