@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_08_222128) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_08_222636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_08_222128) do
     t.string "category"
     t.string "subcategory"
     t.string "section_number"
+    t.boolean "ai_generated", default: false, null: false
     t.index ["category", "subcategory"], name: "index_posts_on_category_and_subcategory"
     t.index ["post_type", "category"], name: "index_posts_on_post_type_and_category"
     t.index ["post_type"], name: "index_posts_on_post_type"
