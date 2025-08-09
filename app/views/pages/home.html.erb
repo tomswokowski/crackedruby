@@ -3,18 +3,19 @@
 <!-- Hero Section -->
 <section class="relative">
   <div class="relative max-w-7xl mx-auto px-6 pt-4 md:pt-6 pb-10 md:pb-14">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-black max-w-4xl">
+    <h1 class="relative pl-1 text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-black max-w-4xl">
       Learn Ruby Fast With AI
+      <span class="absolute -bottom-3 left-1 h-1.5 w-16 bg-ruby rounded-full"></span>
     </h1>
 
-    <p class="mt-5 text-lg md:text-xl text-gray max-w-2xl">
+    <p class="mt-5 pl-1 text-lg md:text-xl text-gray max-w-2xl">
       Adaptive challenges that give you instant feedback, push your skills to the next level,
       and help you grow as a Ruby developer.
     </p>
 
-    <div class="mt-8">
+    <div class="mt-8 pl-1">
       <%= link_to about_path,
-                  class: "inline-block px-8 py-4 text-lg font-bold rounded-xl bg-ruby text-white shadow-lg
+                  class: "inline-block px-6 md:px-8 py-3 md:py-4 text-lg font-bold rounded-xl bg-ruby text-white shadow-lg
                           hover:shadow-xl hover:scale-[1.02] focus:outline-none focus:ring-4
                           focus:ring-ruby/40 transition" do %>
         Get Started Now
