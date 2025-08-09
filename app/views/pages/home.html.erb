@@ -1,11 +1,81 @@
-<% content_for :title, "Ruby, Software Development, and More" %>
+<% content_for :title, "Ruby Documentation & Coding Platform" %>
 
-<div class="space-y-8 mb-16">
+<!-- Hero Section -->
+<div class="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-16 mb-16 rounded-3xl">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(225,29,72,0.1),transparent_50%)]"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-black mb-4 leading-tight tracking-tight">
+        Master Ruby with<br>
+        <span class="text-ruby relative">
+          Interactive Coding
+          <div class="absolute -bottom-1 md:-bottom-2 left-0 right-0 h-2 md:h-3 bg-ruby/20 -skew-x-12 transform"></div>
+        </span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray max-w-3xl mx-auto leading-relaxed mb-8">
+        Level up your Ruby skills with our AI-powered coding platform. Write code, get instant feedback, 
+        and progress through challenges tailored to your skill level.
+      </p>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+      <%= link_to about_path, class: "w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-ruby text-white rounded-xl hover:bg-ruby/90 hover:shadow-2xl hover:scale-105 transition-all duration-300 font-bold text-base md:text-lg shadow-lg" do %>
+        🚀 Start Coding Challenges
+      <% end %>
+      <%= link_to learn_ruby_posts_path, class: "w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-white border-2 border-black text-black rounded-xl hover:bg-black hover:text-white transition-all duration-300 font-semibold text-base md:text-lg shadow-lg" do %>
+        📚 Browse Documentation
+      <% end %>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 md:gap-8 text-black font-medium text-sm md:text-base">
+      <div class="flex items-center gap-3 bg-white/80 px-3 md:px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+        <div class="w-2 md:w-3 h-2 md:h-3 bg-ruby rounded-full animate-pulse"></div>
+        AI-Powered Feedback
+      </div>
+      <div class="flex items-center gap-3 bg-white/80 px-3 md:px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+        <div class="w-2 md:w-3 h-2 md:h-3 bg-gray rounded-full"></div>
+        Progressive Challenges
+      </div>
+      <div class="flex items-center gap-3 bg-white/80 px-3 md:px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+        <div class="w-2 md:w-3 h-2 md:h-3 bg-black rounded-full"></div>
+        Track Your Progress
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Sections -->
+<div class="grid md:grid-cols-2 gap-12 mb-16">
   <% [
-    ["Learn Ruby",           @latest_learn_ruby,   "/learn-ruby"],
-    ["Software Dev",         @latest_software_dev, "/software-development"],
-    ["Blog",                 @latest_blog,         "/blog"]
-  ].each do |heading, collection, path| %>
-    <%= render "shared/carousel", heading: heading, collection: collection, path: path %>
+    {
+      title: "Learn Ruby",
+      description: "Master Ruby from fundamentals to advanced concepts. Comprehensive guides covering syntax, object-oriented programming, metaprogramming, and Ruby best practices.",
+      path: learn_ruby_posts_path
+    },
+    {
+      title: "Software Development", 
+      description: "Level up your development skills with modern practices. DevOps, backend architecture, frontend frameworks, testing strategies, and industry best practices.",
+      path: software_dev_posts_path
+    }
+  ].each do |section| %>
+    <%= link_to section[:path], class: "group block p-6 hover:bg-gray-light/30 rounded-xl transition-all duration-200" do %>
+      <h3 class="text-3xl font-bold text-black group-hover:text-ruby transition-colors mb-4">
+        <%= section[:title] %>
+      </h3>
+      <p class="text-gray leading-relaxed mb-4">
+        <%= section[:description] %>
+      </p>
+      <span class="text-ruby group-hover:text-ruby/80 font-semibold flex items-center gap-2">
+        Explore
+        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+      </span>
+    <% end %>
   <% end %>
+</div>
+
+<!-- Blog Section -->
+<div class="mb-16">
+  <%= render "shared/carousel", heading: "Latest Blog Posts", collection: @latest_blog, path: "/blog" %>
 </div>
