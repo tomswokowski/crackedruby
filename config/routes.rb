@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root "pages#home"
 
-  # App Route
-  get "/app", to: "app#index", as: :app
-
   # Static Pages
   get "about",   to: "pages#about",   as: :about
   get "terms",   to: "pages#terms",   as: :terms
@@ -19,9 +16,12 @@ Rails.application.routes.draw do
   get "blog",                       to: "posts#index", post_type: "blog", as: :blog_posts
   get "blog/:slug",                 to: "posts#show", post_type: "blog", as: :blog_post
 
-  # Authenticated Routes
+  # App (namespaced)
+  get "/app", to: "app/home#index", as: :app
   authenticate :user do
-    get "settings", to: "settings#index", as: :settings
+    scope :app, module: :app, as: :app do
+      get "settings", to: "settings#index"
+    end
   end
 
   # Admin Routes
