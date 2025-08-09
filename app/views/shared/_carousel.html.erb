@@ -40,8 +40,8 @@
       <!-- Track -->
       <div
         data-carousel-target="pane"
-        class="flex overflow-x-auto gap-4 pb-2 snap-x snap-mandatory no-scrollbar
-               focus:outline-none focus:ring-2 focus:ring-ruby focus:ring-offset-2 rounded"
+        class="flex overflow-x-auto gap-4 pb-2 snap-x snap-mandatory no-scrollbar rounded
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ruby focus-visible:ring-offset-2"
         tabindex="0" role="region" aria-label="<%= heading %>">
         <%= render partial: "shared/carousel/content_card", collection: collection, as: :item %>
         <% if path.present? %>
