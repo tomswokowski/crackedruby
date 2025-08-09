@@ -10,14 +10,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_omniauth_failure_path_for(_scope)
-    root_path
+    app_path
   end
 
   private
 
   def handle_auth(kind)
     if user_signed_in?
-      redirect_to root_path, notice: "You're already signed in."
+      redirect_to app_path, notice: "You're already signed in."
       return
     end
 
@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: kind) if is_navigational_format?
     else
-      redirect_to root_path, alert: "#{kind} authentication failed."
+      redirect_to app_path, alert: "#{kind} authentication failed."
     end
   end
 end
