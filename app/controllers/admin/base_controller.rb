@@ -3,10 +3,14 @@ module Admin
     before_action :authenticate_user!
     before_action :ensure_admin!
 
+    layout "admin"
+
     private
 
     def ensure_admin!
-      redirect_to root_path, alert: "Not authorized" unless current_user.admin?
+      unless current_user&.admin?
+        redirect_to app_path, alert: "Not authorized."
+      end
     end
   end
 end

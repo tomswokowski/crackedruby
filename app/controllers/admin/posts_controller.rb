@@ -3,11 +3,10 @@ module Admin
     before_action :set_post, only: %i[show edit update destroy]
 
     def index
-      @posts = Post.all
+      @posts = Post.order(updated_at: :desc)
     end
 
-    def show
-    end
+    def show; end
 
     def new
       @post = Post.new
@@ -22,8 +21,7 @@ module Admin
       end
     end
 
-    def edit
-    end
+    def edit; end
 
     def update
       if @post.update(post_params)
@@ -42,15 +40,28 @@ module Admin
 
     def set_post
       identifier = params[:slug].presence || params[:id]
-      if identifier.to_s.match?(/\A\d+\z/)
-        @post = Post.find(identifier)
-      else
-        @post = Post.find_by!(slug: identifier)
-      end
+      @post =
+        if identifier.to_s.match?(/\A\d+\z/)
+          Post.find(identifier)
+        else
+          Post.find_by!(slug: identifier)
+        end
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :slug, :published, :featured, :post_type, :description)
+      params.require(:post).permit(
+        :title,
+        :body,
+        :slug,
+        :published,
+        :featured,
+        :post_type,
+        :description,
+        :category,
+        :subcategory,
+        :section_number,
+        :ai_generated
+      )
     end
   end
 end

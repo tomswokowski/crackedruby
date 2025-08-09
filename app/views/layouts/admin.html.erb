@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ["Admin – CrackedRuby", content_for?(:title) ? yield(:title) : nil].compact.join(" – ") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="flex flex-col min-h-screen bg-gray-light/30">
+    <!-- Top Bar (Admin) -->
+    <header class="flex items-center justify-between bg-white px-4 py-3 shadow-sm border-b border-gray-light">
+      <%= link_to root_path, class: "flex items-center text-gray hover:text-black" do %>
+        <!-- Door Arrow Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H9m0 0l3-3m-3 3l3 3" />
+        </svg>
+        Home
+      <% end %>
+
+      <!-- Account Menu -->
+      <div class="relative">
+        <% if user_signed_in? %>
+          <details class="group relative">
+            <summary class="flex items-center cursor-pointer select-none list-none px-3 py-1.5 rounded hover:bg-gray-light">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.001 9.001 0 0112 15a9.001 9.001 0 016.879 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </summary>
+            <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-light rounded shadow-lg z-50 p-2 space-y-1">
+              <div class="px-2 py-1 text-xs text-gray truncate">
+                <%= current_user.email %>
+              </div>
+              <%= link_to "Admin Dashboard", admin_root_path, class: "block px-2 py-1 hover:bg-gray-light rounded text-sm text-ruby cursor-pointer" %>
+              <%= link_to "Settings", app_settings_path, class: "block px-2 py-1 hover:bg-gray-light rounded text-sm cursor-pointer" %>
+              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "w-full text-left px-2 py-1 hover:bg-gray-light rounded text-sm cursor-pointer" %>
+            </div>
+          </details>
+        <% else %>
+          <button data-action="click->modal#open" class="px-4 py-2 bg-ruby text-white rounded hover:bg-ruby/90 cursor-pointer">
+            Sign In
+          </button>
+        <% end %>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <%= yield %>
+    </main>
+
+    <!-- Global Sign-In Modal -->
+    <div data-controller="modal">
+      <%= render "shared/sign_in_modal" %>
+    </div>
+  </body>
+</html>
