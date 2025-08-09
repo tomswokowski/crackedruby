@@ -13,20 +13,22 @@
   <% end %>
 
   <%# ───────────────── Header ───────────────── %>
-  <div class="mb-8 pb-6 border-b border-gray-light">
+  <div class="mb-8 pb-6 border-b border-gray-light max-w-3xl xl:max-w-4xl">
     <h1 class="relative text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-black">
       <%= @post.title %>
       <span class="absolute left-0 -bottom-3 h-1.5 w-12 bg-ruby rounded-full"></span>
     </h1>
 
     <% if @post.description.present? %>
-      <p class="mt-5 text-lg md:text-xl text-gray max-w-3xl">
+      <p class="mt-4 text-lg md:text-xl text-black/70">
         <%= @post.description %>
       </p>
     <% end %>
 
-    <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray">
-      <time datetime="<%= @post.created_at.iso8601 %>"><%= @post.created_at.to_date.strftime("%B %-d, %Y") %></time>
+    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray">
+      <time datetime="<%= @post.created_at.iso8601 %>">
+        <%= @post.created_at.to_date.strftime("%B %-d, %Y") %>
+      </time>
       <span aria-hidden="true">•</span>
       <span class="inline-flex items-center gap-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -38,14 +40,12 @@
   </div>
 
   <%# ───────────────── Content ───────────────── %>
-  <div>
-    <div class="markdown-content max-w-5xl">
-      <%== marksmithed @post.body %>
-    </div>
+  <div class="markdown-content max-w-3xl xl:max-w-4xl">
+    <%== marksmithed @post.body %>
   </div>
 
   <%# ───────────────── Footer ───────────────── %>
-  <div class="max-w-5xl mt-12 pt-8 border-t border-gray-light">
+  <div class="max-w-3xl xl:max-w-4xl mt-12 pt-8 border-t border-gray-light">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <%= link_to @back_link_path,
         class: "inline-flex items-center gap-2 px-4 py-2 border border-gray-light hover:border-black rounded-lg transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ruby/30" do %>
