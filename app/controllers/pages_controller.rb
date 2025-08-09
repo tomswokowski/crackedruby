@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   def home
-    @latest_learn_ruby = Post.learn_ruby.published.order(created_at: :desc).limit(5)
-    @latest_software_dev = Post.software_dev.published.order(created_at: :desc).limit(5)
-    @latest_blog = Post.blogs.published.order(created_at: :desc).limit(5)
+    @latest_blog = Post.blogs.published
+                       .select(:id, :title, :slug, :description, :created_at, :post_type)
+                       .order(created_at: :desc)
+                       .limit(5)
   end
 
   def about
