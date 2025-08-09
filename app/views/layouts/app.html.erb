@@ -22,12 +22,11 @@
         Home
       <% end %>
 
-      <!-- Account Menu -->
+      <!-- Account Menu / Sign in -->
       <div class="relative">
         <% if user_signed_in? %>
           <details class="group relative">
             <summary class="flex items-center cursor-pointer select-none list-none px-3 py-1.5 rounded hover:bg-gray-light">
-              <!-- Avatar or icon -->
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9.001 9.001 0 0112 15a9.001 9.001 0 016.879 2.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -41,9 +40,14 @@
             </div>
           </details>
         <% else %>
-          <button data-action="click->modal#open" class="px-4 py-2 bg-ruby text-white rounded hover:bg-ruby/90 cursor-pointer">
-            Sign In
-          </button>
+          <div data-controller="modal" class="inline">
+            <button
+              data-action="click->modal#open"
+              class="px-4 py-2 bg-ruby text-white rounded hover:bg-ruby/90 cursor-pointer">
+              Sign In
+            </button>
+            <%= render "shared/sign_in_modal" %>
+          </div>
         <% end %>
       </div>
     </header>
@@ -52,10 +56,5 @@
     <main class="flex-1">
       <%= yield %>
     </main>
-
-    <!-- Global Sign-In Modal -->
-    <div data-controller="modal">
-      <%= render "shared/sign_in_modal" %>
-    </div>
   </body>
 </html>
