@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "pages#home"
 
   # Static Pages
+  get "/app",    to: "pages#app",     as: :app
   get "about",   to: "pages#about",   as: :about
   get "terms",   to: "pages#terms",   as: :terms
   get "privacy", to: "pages#privacy", as: :privacy
