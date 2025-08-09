@@ -3,21 +3,19 @@
 <!-- Hero Section -->
 <section class="relative">
   <div class="relative max-w-7xl mx-auto px-6 pt-4 md:pt-6 pb-10 md:pb-14">
-    
-    <h1 class="relative text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-black tracking-tight max-w-4xl">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-black max-w-4xl">
       Learn Ruby Faster With AI
-      <span class="absolute -bottom-3 left-0 h-1.5 w-16 bg-ruby rounded-full"></span>
     </h1>
 
     <p class="mt-5 text-lg md:text-xl text-gray max-w-2xl">
-      Adaptive challenges that give you instant feedback, push your skills to the next level, 
+      Adaptive challenges that give you instant feedback, push your skills to the next level,
       and help you grow as a Ruby developer.
     </p>
 
     <div class="mt-8">
       <%= link_to about_path,
-                  class: "inline-block px-8 py-4 text-lg font-bold rounded-xl bg-ruby text-white shadow-lg 
-                          hover:shadow-xl hover:scale-[1.02] focus:outline-none focus:ring-4 
+                  class: "inline-block px-8 py-4 text-lg font-bold rounded-xl bg-ruby text-white shadow-lg
+                          hover:shadow-xl hover:scale-[1.02] focus:outline-none focus:ring-4
                           focus:ring-ruby/40 transition" do %>
         Start Coding Now
       <% end %>
@@ -49,7 +47,7 @@
 
         <div class="flex-1 min-h-[180px] md:min-h-[160px]">
           <span class="inline-block h-1.5 w-12 bg-ruby rounded-full mb-4"></span>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-black tracking-tight leading-[1.1]">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-[1.1] text-black">
             <%= s[:title] %>
           </h2>
           <p class="mt-3 text-gray leading-relaxed">
@@ -71,6 +69,6 @@
 </section>
 
 <!-- Blog Section -->
-<div class="mb-16">
+<section class="max-w-7xl mx-auto px-6 pb-16">
   <%= render "shared/carousel", heading: "Latest Blog Posts", collection: @latest_blog, path: "/blog" %>
-</div>
+</section>
