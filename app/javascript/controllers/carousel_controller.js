@@ -4,55 +4,53 @@ export default class extends Controller {
   static targets = ['pane', 'fade', 'leftBtn', 'rightBtn'];
 
   connect() {
-    // Pre-bind handlers for efficient add/remove
-    this.boundUpdate = this.update.bind(this);
+    this.pointerQuery = window.matchMedia('(pointer: coarse)');
+    this.isCoarse = this.pointerQuery.matches;
+    this.pointerListener = (e) => {
+      this.isCoarse = e.matches;
+      this.update();
+    };
+    this.pointerQuery.addEventListener?.('change', this.pointerListener);
 
+    this.boundUpdate = this.update.bind(this);
     this.paneTarget.addEventListener('scroll', this.boundUpdate, { passive: true });
     window.addEventListener('resize', this.boundUpdate);
 
-    // Keyboard navigation
     this.boundKeydown = this.handleKeydown.bind(this);
     this.paneTarget.addEventListener('keydown', this.boundKeydown);
 
-    this.update(); // Check initial state
+    this.update();
   }
 
   disconnect() {
     this.paneTarget.removeEventListener('scroll', this.boundUpdate);
     window.removeEventListener('resize', this.boundUpdate);
     this.paneTarget.removeEventListener('keydown', this.boundKeydown);
+    this.pointerQuery?.removeEventListener?.('change', this.pointerListener);
   }
 
   update() {
-    // Hide fade on mobile - carousel doesn't need fade indicator
-    if (window.innerWidth < 768) {
-      this.fadeTarget.classList.add('hidden');
-      return;
+    const { scrollLeft, clientWidth, scrollWidth } = this.paneTarget;
+    const atStart = scrollLeft <= 5;
+    const atEnd = scrollLeft + clientWidth >= scrollWidth - 5;
+
+    if (this.hasFadeTarget) {
+      this.fadeTarget.classList.toggle('hidden', this.isCoarse || atEnd);
     }
 
-    // Check if scrolled to the end and toggle fade accordingly
-    const { scrollLeft, clientWidth, scrollWidth } = this.paneTarget;
-    const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
-    this.fadeTarget.classList.toggle('hidden', atEnd);
+    const showLeft = !this.isCoarse && !atStart;
+    const showRight = !this.isCoarse && !atEnd;
 
-    // Update button states for desktop navigation
-    this.updateButtonStates();
+    if (this.hasLeftBtnTarget) this.leftBtnTarget.classList.toggle('hidden', !showLeft);
+    if (this.hasRightBtnTarget) this.rightBtnTarget.classList.toggle('hidden', !showRight);
   }
 
   scrollLeft() {
-    const cardWidth = this.getCardWidth();
-    this.paneTarget.scrollBy({
-      left: -cardWidth, // Scroll by 1 card
-      behavior: 'smooth',
-    });
+    this.paneTarget.scrollBy({ left: -this.getCardWidth(), behavior: 'smooth' });
   }
 
   scrollRight() {
-    const cardWidth = this.getCardWidth();
-    this.paneTarget.scrollBy({
-      left: cardWidth, // Scroll by 1 card
-      behavior: 'smooth',
-    });
+    this.paneTarget.scrollBy({ left: this.getCardWidth(), behavior: 'smooth' });
   }
 
   handleKeydown(event) {
@@ -71,35 +69,13 @@ export default class extends Controller {
         break;
       case 'End':
         event.preventDefault();
-        this.paneTarget.scrollTo({
-          left: this.paneTarget.scrollWidth,
-          behavior: 'smooth',
-        });
+        this.paneTarget.scrollTo({ left: this.paneTarget.scrollWidth, behavior: 'smooth' });
         break;
-    }
-  }
-
-  updateButtonStates() {
-    const { scrollLeft, clientWidth, scrollWidth } = this.paneTarget;
-
-    // Show/hide left button
-    if (this.hasLeftBtnTarget) {
-      const atStart = scrollLeft <= 5;
-      this.leftBtnTarget.classList.toggle('md:hidden', atStart);
-    }
-
-    // Show/hide right button
-    if (this.hasRightBtnTarget) {
-      const atEnd = scrollLeft + clientWidth >= scrollWidth - 5;
-      this.rightBtnTarget.classList.toggle('md:hidden', atEnd);
     }
   }
 
   getCardWidth() {
     const firstCard = this.paneTarget.querySelector('.snap-start');
-    if (firstCard) {
-      return firstCard.offsetWidth + 16; // Include gap between cards
-    }
-    return 320; // Fallback width
+    return firstCard ? firstCard.offsetWidth + 16 : 320;
   }
 }

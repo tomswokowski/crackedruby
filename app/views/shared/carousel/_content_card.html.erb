@@ -1,33 +1,31 @@
 <%= link_to post_path_for_type(item),
-             class: "group snap-start block flex-shrink-0 last:mr-8
+             class: "group/card snap-start block flex-shrink-0 last:mr-8
                      w-72 sm:w-80 md:w-96" do %>
-  <div class="h-full bg-white border border-gray-light rounded-xl p-6
-              flex flex-col shadow-sm transition duration-200 ease-in-out
-              hover:shadow-md hover:border-ruby hover:ring-1 hover:ring-ruby/20">
-    
-    <% if item.post_type == 'blog' %>
-      <p class="text-sm text-gray mb-2">
-        <%= item.created_at.strftime("%m/%d/%Y") %>
-      </p>
+  <article
+    class="h-full flex flex-col rounded-3xl border border-gray-light/80
+           bg-gradient-to-br from-white to-gray-light/30 p-6
+           shadow-sm hover:shadow-md hover:border-black/50
+           transition-[box-shadow,border-color,transform]">
+
+    <% if item.post_type == "blog" %>
+      <p class="text-xs text-gray mb-2"><%= item.created_at.strftime("%m/%d/%Y") %></p>
     <% end %>
-    <div class="h-14 mb-3 flex items-start">
-      <h3 class="text-xl font-semibold text-black line-clamp-2">
-        <%= item.title %>
-      </h3>
-    </div>
-    <p class="text-base text-gray mb-6 line-clamp-4">
-      <%= item.description %>
-    </p>
+
+    <h3 class="text-lg sm:text-xl font-semibold text-black leading-snug line-clamp-2 mb-2">
+      <%= item.title %>
+    </h3>
+
+    <p class="text-sm text-gray mb-4 line-clamp-4"><%= item.description %></p>
+
     <div class="mt-auto">
-      <span class="inline-flex items-center gap-1 font-medium text-ruby transition
-                   group-hover:text-black">
+      <span class="inline-flex items-center gap-1 font-semibold text-ruby">
         Read more
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="w-4 h-4 transition-transform group-hover:translate-x-1"
-             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg
+          class="w-4 h-4 transition-transform group-hover/card:translate-x-1 motion-reduce:transition-none"
+          fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
       </span>
     </div>
-  </div>
+  </article>
 <% end %>
