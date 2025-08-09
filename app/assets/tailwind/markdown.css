@@ -1,6 +1,6 @@
 /* Markdown Content */
 .markdown-content {
-  @apply text-black/90 leading-relaxed;
+  @apply text-black/90 leading-relaxed break-words;
 }
 
 /* Headings */
@@ -25,7 +25,7 @@
 
 /* Paragraphs */
 .markdown-content p {
-  @apply mb-4 text-[1.02rem] leading-relaxed;
+  @apply mb-4 text-[1.02rem] leading-relaxed break-words;
 }
 .markdown-content p:last-child {
   @apply mb-0;
@@ -33,7 +33,7 @@
 
 /* Links */
 .markdown-content a {
-  @apply text-ruby font-medium hover:underline underline-offset-2 transition-colors;
+  @apply text-ruby font-medium hover:underline underline-offset-2 transition-colors break-words;
 }
 
 /* Emphasis */
@@ -52,7 +52,7 @@
   @apply list-decimal list-outside pl-5 mb-4 space-y-1;
 }
 .markdown-content li {
-  @apply leading-relaxed;
+  @apply leading-relaxed break-words;
 }
 .markdown-content li > ul,
 .markdown-content li > ol {
@@ -73,7 +73,7 @@
 
 /* Code (inline + block) */
 .markdown-content code {
-  @apply bg-gray-light px-2 py-0.5 rounded-md text-[0.9em] font-mono text-black;
+  @apply bg-gray-light px-2 py-0.5 rounded-md text-[0.9em] font-mono text-black break-words;
 }
 .markdown-content pre {
   @apply bg-[#1e1e2f] text-white p-4 rounded-xl mb-6 overflow-x-auto
@@ -87,7 +87,7 @@
 .markdown-content li code,
 .markdown-content th code,
 .markdown-content td code {
-  @apply bg-gray-light px-1.5 py-0.5 rounded text-[0.9em];
+  @apply bg-gray-light px-1.5 py-0.5 rounded text-[0.9em] break-words;
 }
 
 /* Language accents */
@@ -109,10 +109,10 @@
   @apply bg-gray-light/70;
 }
 .markdown-content th {
-  @apply border border-gray-light/70 px-4 py-3 text-left font-semibold text-black/90;
+  @apply border border-gray-light/70 px-4 py-3 text-left font-semibold text-black/90 break-words;
 }
 .markdown-content td {
-  @apply border border-gray-light/70 px-4 py-3 text-black/90;
+  @apply border border-gray-light/70 px-4 py-3 text-black/90 break-words;
 }
 .markdown-content tbody tr:nth-child(even) {
   @apply bg-gray-light/30;

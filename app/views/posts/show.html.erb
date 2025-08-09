@@ -13,10 +13,6 @@
   <% end %>
 
   <%# ───────────────── Header ───────────────── %>
-  <% published_on = @post.created_at.to_date %>
-  <% updated_on   = @post.updated_at.to_date %>
-  <% show_updated = updated_on > published_on %>
-
   <div class="mb-8 pb-6 border-b border-gray-light">
     <h1 class="relative text-3xl sm:text-4xl md:text-5xl font-black leading-tight tracking-tight text-black">
       <%= @post.title %>
@@ -30,7 +26,7 @@
     <% end %>
 
     <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray">
-      <time datetime="<%= @post.created_at.iso8601 %>"><%= published_on.strftime("%B %-d, %Y") %></time>
+      <time datetime="<%= @post.created_at.iso8601 %>"><%= @post.created_at.to_date.strftime("%B %-d, %Y") %></time>
       <span aria-hidden="true">•</span>
       <span class="inline-flex items-center gap-1">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -38,10 +34,6 @@
         </svg>
         <%= pluralize((@post.body.to_s.split.length / 200.0).ceil, "min") %> read
       </span>
-      <% if show_updated %>
-        <span aria-hidden="true">•</span>
-        <span>Updated <%= updated_on.strftime("%B %-d, %Y") %></span>
-      <% end %>
     </div>
   </div>
 
